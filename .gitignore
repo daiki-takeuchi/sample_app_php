@@ -10,4 +10,8 @@ cache.properties
 build
 vendor/
 composer.phar
-application/logs/
+application/logs/*
+!index.html
+/application/views/templates_c/*
+!.gitkeep
+public/user_guide/
