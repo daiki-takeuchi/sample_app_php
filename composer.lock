@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "06227160da179a3f2c8eab847755584f",
+    "hash": "986ecd4bd71c21991a70c13d430f266e",
     "packages": [
         {
             "name": "aura/cli",
@@ -1431,61 +1431,6 @@
             "time": "2015-06-21 13:59:46"
         },
         {
-            "name": "smarty/smarty",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/smarty-php/smarty.git",
-                "reference": "bfcffb009aa8ead7e77290115d5c9d652588b3e4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/smarty-php/smarty/zipball/bfcffb009aa8ead7e77290115d5c9d652588b3e4",
-                "reference": "bfcffb009aa8ead7e77290115d5c9d652588b3e4",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.2"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.1.x-dev"
-                }
-            },
-            "autoload": {
-                "classmap": [
-                    "libs/Smarty.class.php",
-                    "libs/SmartyBC.class.php",
-                    "libs/sysplugins/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "Monte Ohrt",
-                    "email": "monte@ohrt.com"
-                },
-                {
-                    "name": "Uwe Tews",
-                    "email": "uwe.tews@googlemail.com"
-                },
-                {
-                    "name": "Rodney Rehm",
-                    "email": "rodney.rehm@medialize.de"
-                }
-            ],
-            "description": "Smarty - the compiling PHP template engine",
-            "homepage": "http://www.smarty.net",
-            "keywords": [
-                "templating"
-            ],
-            "time": "2015-09-01 00:52:09"
-        },
-        {
             "name": "symfony/yaml",
             "version": "v2.7.3",
             "source": {
@@ -1570,7 +1515,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "smarty/smarty": 20,
         "kenjis/ci-phpunit-test": 20,
         "kenjis/codeigniter-cli": 20
     },
