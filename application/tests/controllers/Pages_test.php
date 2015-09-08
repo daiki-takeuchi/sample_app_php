@@ -22,7 +22,7 @@ class Pages_test extends TestCase
      */
     public function 引数にaboutを指定した場合はaboutページへ遷移()
     {
-        $output = $this->request('GET', ['Pages', 'index/about']);
+        $output = $this->request('GET', ['Pages', 'index','about']);
         $this->assertContains('about', $output);
     }
 
@@ -31,7 +31,7 @@ class Pages_test extends TestCase
      */
     public function 引数に存在しないページを指定した場合は404へ遷移()
     {
-        $output = $this->request('GET', ['Pages', 'index/aaa']);
+        $output = $this->request('GET', ['Pages', 'index', 'aaa']);
         $this->assertResponseCode(404);
     }
 
