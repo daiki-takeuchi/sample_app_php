@@ -18,7 +18,7 @@
 
         <div class="row">
             <div class="col-lg-4">
-                <img class="img-circle" src="/sample_app_php/assets/images/Penguins.jpg" width="180" height="180">
+                <img class="img-circle" src="{site_url}assets/images/Penguins.jpg" width="180" height="180">
 
                 <h2>ペンギン</h2>
 
@@ -27,7 +27,7 @@
                 <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
             </div>
             <div class="col-lg-4">
-                <img class="img-circle" src="/sample_app_php/assets/images/Koala.jpg" width="180" height="180">
+                <img class="img-circle" src="{site_url}assets/images/Koala.jpg" width="180" height="180">
 
                 <h2>こあら</h2>
 
@@ -36,7 +36,7 @@
                 <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
             </div>
             <div class="col-lg-4">
-                <img class="img-circle" src="/sample_app_php/assets/images/Tulips.jpg" width="180" height="180">
+                <img class="img-circle" src="{site_url}assets/images/Tulips.jpg" width="180" height="180">
 
                 <h2>チューリップ</h2>
 

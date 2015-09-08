@@ -6,14 +6,14 @@
     <title>{block name=title}{/block}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="format-detection" content="telephone=no"/>
-    <link rel="stylesheet" href="/sample_app_php/assets/stylesheets/application.css"/>
-    <link rel="stylesheet" href="/sample_app_php/assets/stylesheets/jquery-ui-1.11.4.custom.css"/>
-    <link rel="stylesheet" href="/sample_app_php/assets/stylesheets/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/sample_app_php/assets/stylesheets/bootstrap-theme.min.css"/>
-    <link rel="stylesheet" href="/sample_app_php/assets/stylesheets/application.css"/>
-    <script src="/sample_app_php/assets/javascripts/jquery-1.11.3.js"></script>
-    <script src="/sample_app_php/assets/javascripts/jquery-ui-1.11.4.custom.js"></script>
-    <script src="/sample_app_php/assets/javascripts/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{site_url}assets/stylesheets/application.css"/>
+    <link rel="stylesheet" href="{site_url}assets/stylesheets/jquery-ui-1.11.4.custom.css"/>
+    <link rel="stylesheet" href="{site_url}assets/stylesheets/bootstrap.min.css"/>
+    <link rel="stylesheet" href="{site_url}assets/stylesheets/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="{site_url}assets/stylesheets/application.css"/>
+    <script src="{site_url}assets/javascripts/jquery-1.11.3.js"></script>
+    <script src="{site_url}assets/javascripts/jquery-ui-1.11.4.custom.js"></script>
+    <script src="{site_url}assets/javascripts/bootstrap.min.js"></script>
     {include file='templates/shim.tpl'}
 </head>
 <body>
