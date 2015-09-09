@@ -28,10 +28,9 @@ class News extends CI_Controller
         $config['base_url'] = base_url() . "/news/pages";
         $config['total_rows'] = $this->news_model->get_count_all();
         $config['per_page'] = $limit['limit'];
-        $config['full_tag_open'] = '<div class="pagination pagination-small ppagination-centerde"<ul>';
-        $config['full_tag_close'] = '</ul></div>';
+        $config['full_tag_open'] = '<ul class="pagination">';
+        $config['full_tag_close'] = '</ul>';
         $config['num_links'] = 5;
-        $config['page_query_string'] = FALSE;
         $config['prev_link'] = '&lt; 前';
         $config['prev_tag_open'] = '<li>';
         $config['prev_tag_close'] = '</li>';
