@@ -16,36 +16,18 @@ class News extends CI_Controller
 
     public function index()
     {
-        $this->load->library('pagination');
-
         $limit = array(
             'limit' => 10,
-            'offset' => ($this->uri->segment(3) !== '') ? $this->uri->segment(3) : 0
+            'offset' => $this->uri->segment(3 ,0)
         );
         // 登録されているデータを全件取得
         $data['news'] = $this->news_model->get_news(FALSE, $limit);
 
-        $config['base_url'] = base_url() . "/news/pages";
-        $config['total_rows'] = $this->news_model->get_count_all();
-        $config['per_page'] = $limit['limit'];
-        $config['full_tag_open'] = '<ul class="pagination">';
-        $config['full_tag_close'] = '</ul>';
-        $config['num_links'] = 5;
-        $config['prev_link'] = '&lt; 前';
-        $config['prev_tag_open'] = '<li>';
-        $config['prev_tag_close'] = '</li>';
-        $config['next_link'] = '次 &gt;';
-        $config['next_tag_open'] = '<li>';
-        $config['next_tag_close'] = '</li>';
-        $config['cur_tag_open'] = '<li class="active"><a href="#">';
-        $config['cur_tag_close'] = '</a></li>';
-        $config['num_tag_open'] = '<li>';
-        $config['num_tag_close'] = '</li>';
-        $config['first_link'] = FALSE;
-        $config['last_link'] = FALSE;
-
-        $this->pagination->initialize($config);
-        $data['pagination'] = $this->pagination->create_links();
+        // paginationの作成
+        $this->load->library('Generate_pagination');
+        $total = $this->news_model->get_count_all();
+        $path = base_url() . "/news/pages";
+        $data['pagination'] = $this->generate_pagination->get_links($path, $total, $limit['limit']);
 
         $data['title'] = 'ニュース | サンプルアプリケーション ';
 
