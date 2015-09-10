@@ -15,4 +15,4 @@ application/logs/*
 /application/views/templates_c/*
 !.gitkeep
 public/user_guide/
-tmp/log/*
+tmp/log/*.log
