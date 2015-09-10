@@ -6,6 +6,10 @@ class News extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        // ログインしていない場合は404
+        if( ! $this->session->userdata("is_logged_in")) {
+            show_404();
+        }
         // データベース接続モデルをロード
         $this->load->model('news_model');
         $this->load->helper('url_helper');
@@ -74,7 +78,7 @@ class News extends CI_Controller
             $data['title'] = 'ニュース編集';
         }
 
-//		echo var_dump($id);
+//      echo var_dump($id);
         if ($_POST) {
             $this->_save_news($news);
         }

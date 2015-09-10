@@ -37,11 +37,11 @@
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$lang['migration_none_found'] = 'No migrations were found.';
-$lang['migration_not_found'] = 'No migration could be found with the version number: %s.';
-$lang['migration_sequence_gap'] = 'There is a gap in the migration sequence near version number: %s.';
-$lang['migration_multiple_version'] = 'There are multiple migrations with the same version number: %s.';
-$lang['migration_class_doesnt_exist'] = 'The migration class "%s" could not be found.';
-$lang['migration_missing_up_method'] = 'The migration class "%s" is missing an "up" method.';
-$lang['migration_missing_down_method'] = 'The migration class "%s" is missing a "down" method.';
-$lang['migration_invalid_filename'] = 'Migration "%s" has an invalid filename.';
+$lang['migration_none_found'] = 'マイグレーション対象は見つかりませんでした';
+$lang['migration_not_found'] = '%sのバージョンではマイグレーション対象は見つかりませんでした';
+$lang['migration_sequence_gap'] = '%sのバージョンではマイグレーション順序にギャップがあります';
+$lang['migration_multiple_version'] = '複数のマイグレーションが%sのバージョンであります';
+$lang['migration_class_doesnt_exist'] = 'マイグレーションクラス "%s"が見つかりません';
+$lang['migration_missing_up_method'] = '"up"メソッドではマイグレーションクラス "%s" は見つかりません';
+$lang['migration_missing_down_method'] = '"down"メソッドではマイグレーションクラス "%s" は見つかりません';
+$lang['migration_invalid_filename'] = 'マイグレーション "%s" に不正なファイル名があります';

@@ -2,174 +2,189 @@
 
 /* universal */
 html {
-	overflow-y: scroll;
+    overflow-y: scroll;
 }
 
 body {
-	padding-top: 60px;
+    padding-top: 60px;
 }
 
 section {
-	overflow: auto;
+    overflow: auto;
 }
 
 textarea {
-	resize: vertical;
+    resize: vertical;
 }
 
 .center {
-	text-align: center;
+    text-align: center;
 }
 
 .center h1 {
-	margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 /* typography */
-h1,h2,h3,h4,h5,h6 {
-	line-height: 1;
+h1, h2, h3, h4, h5, h6 {
+    line-height: 1;
 }
 
 h1 {
-	font-size: 3em;
-	letter-spacing: -2px;
-	margin-bottom: 30px;
-	text-align: center;
+    font-size: 3em;
+    letter-spacing: -2px;
+    margin-bottom: 30px;
+    text-align: center;
 }
 
 h2 {
-	font-size: 1.2em;
-	letter-spacing: -1px;
-	margin-bottom: 30px;
-	text-align: center;
-	font-weight: normal;
-	color: #777;
+    font-size: 1.2em;
+    letter-spacing: -1px;
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: normal;
+    color: #777;
 }
 
 p {
-	font-size: 1.1em;
-	line-height: 1.7em;
+    font-size: 1.1em;
+    line-height: 1.7em;
 }
 
 /* header */
 #logo {
-	float: left;
-	margin-right: 10px;
-	font-size: 1.7em;
-	color: #fff;
-	text-transform: uppercase;
-	letter-spacing: -1px;
-	padding-top: 12px;
-	font-weight: bold;
-	line-height: 1;
+    float: left;
+    margin-right: 10px;
+    font-size: 1.7em;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    padding-top: 12px;
+    font-weight: bold;
+    line-height: 1;
 }
 
 #logo:hover {
-	color: #fff;
-	text-decoration: none;
+    color: #fff;
+    text-decoration: none;
 }
 
 header {
-	margin-top: -8px;
-	border-top: 1px solid #eaeaea;
-	color: #999;
+    margin-top: -8px;
+    border-top: 1px solid #eaeaea;
+    color: #999;
 }
 
-.home .col-lg-4{
-	margin-bottom: 20px;
-	text-align: center;
+.home .col-lg-4 {
+    margin-bottom: 20px;
+    text-align: center;
 }
 
-.home .h2{
-	font-weight: normal;
+.home .h2 {
+    font-weight: normal;
 }
 
-.home .col-lg-4 p{
-	margin-right: 10px;
-	margin-left: 10px;
+.home .col-lg-4 p {
+    margin-right: 10px;
+    margin-left: 10px;
 }
 
 .carousel {
-	margin-bottom: 60px;
+    margin-bottom: 60px;
 }
 
 .carousel .container {
-	position: relative;
-	z-index: 9;
+    position: relative;
+    z-index: 9;
 }
 
 .carousel-control {
-	height: 80px;
-	margin-top: 0;
-	font-size: 120px;
-	text-shadow: 0 1px 1px rgba(0,0,0,.4);
-	background-color: transparent;
-	border: 0;
-	z-index: 10;
+    height: 80px;
+    margin-top: 0;
+    font-size: 120px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, .4);
+    background-color: transparent;
+    border: 0;
+    z-index: 10;
 }
 
 .carousel .item {
-	height: 500px;
+    height: 500px;
 }
 
 .carousel img {
-	position: absolute;
-	top: 0;
-	left: 0;
-	min-width: 100%;
-	height: 500px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    height: 500px;
 }
 
 .carousel-caption {
-	background-color: transparent;
-	position: static;
-	max-width: 550px;
-	padding: 0 20px;
-	margin-top: 200px;
+    background-color: transparent;
+    position: static;
+    max-width: 550px;
+    padding: 0 20px;
+    margin-top: 200px;
 }
 
 .carousel-caption h1,
 .carousel-caption .lead {
-	margin: 0;
-	line-height: 1.25;
-	color: #fff;
-	text-shadow: 0 1px 1px rgba(0,0,0,.4);
+    margin: 0;
+    line-height: 1.25;
+    color: #fff;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, .4);
 }
 
 .carousel-caption .btn {
-	margin-top: 10px;
+    margin-top: 10px;
+}
+
+/* forms */
+.from-group {
+    margin-bottom: 15px;
+}
+
+input, textarea, select, .uneditable-input {
+    border: 1px solid #bbb;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+input {
+    height: auto !important;
 }
 
 /* footer */
 footer {
-	margin-top: 45px;
-	padding-top: 5px;
-	border-top: 1px solid #eaeaea;
-	color: #999;
+    margin-top: 45px;
+    padding-top: 5px;
+    border-top: 1px solid #eaeaea;
+    color: #999;
 }
 
 footer a {
-	color: #555;
+    color: #555;
 }
 
 footer a:hover {
-	color: #222;
+    color: #222;
 }
 
 footer small {
-	float: left;
+    float: left;
 }
 
 footer ul {
-	float: right;
-	list-style: none;
+    float: right;
+    list-style: none;
 }
 
 footer ul li {
-	float: left;
-	margin-left: 10px;
+    float: left;
+    margin-left: 10px;
 }
 
 #error_explanation {
-	color : #f00;
+    color: #f00;
 }
