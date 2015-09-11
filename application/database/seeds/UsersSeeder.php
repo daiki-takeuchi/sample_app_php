@@ -9,21 +9,27 @@ class UsersSeeder extends Seeder
         $data = [
             'email' => 'email1@example.com',
             'name' => '名前１',
-            'password' => md5('email1@example.com'.'password'),
+            'password' => sha1('email1@example.com'.'password'),
+            'created_at' => date('Y/m/d H:i:s'),
+            'updated_at' => date('Y/m/d H:i:s')
         ];
         $this->db->insert('users', $data);
 
         $data = [
             'email' => 'email2@example.com',
             'name' => '名前２',
-            'password' => md5('email2@example.com'.'password'),
+            'password' => sha1('email2@example.com'.'password'),
+            'created_at' => date('Y/m/d H:i:s'),
+            'updated_at' => date('Y/m/d H:i:s')
         ];
         $this->db->insert('users', $data);
 
         $data = [
             'email' => 'email3@example.com',
             'name' => '名前３',
-            'password' => md5('email3@example.com'.'password'),
+            'password' => sha1('email3@example.com'.'password'),
+            'created_at' => date('Y/m/d H:i:s'),
+            'updated_at' => date('Y/m/d H:i:s')
         ];
         $this->db->insert('users', $data);
     }
