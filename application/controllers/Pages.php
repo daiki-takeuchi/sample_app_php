@@ -22,6 +22,11 @@ class Pages extends CI_Controller
 
     public function login()
     {
+        // ログインしている場合はホームに移動
+        if($this->session->userdata("is_logged_in")) {
+            redirect(site_url());
+        }
+
         if (isset($_POST)) {
             $this->_login_validation();
         }
@@ -35,7 +40,7 @@ class Pages extends CI_Controller
     {
         $this->load->library("form_validation");
 
-        $this->form_validation->set_rules("email", "メールアドレス", "required|trim|valid_email|callback_validate_credentials");
+        $this->form_validation->set_rules("email", "メールアドレス", "required|trim|valid_email|callback__validate_credentials");
         $this->form_validation->set_rules("password", "パスワード", "required|md5|trim");
         if ($this->form_validation->run() !== FALSE) {
             $email = $this->input->post("email");
@@ -50,14 +55,14 @@ class Pages extends CI_Controller
         }
     }
 
-    public function validate_credentials()
+    public function _validate_credentials()
     {
         $this->load->model("users_model");
 
         if($this->users_model->can_log_in()) {
             return true;
         } else {
-            $this->form_validation->set_message("validate_credentials", "ユーザー名かパスワードが異なります。");
+            $this->form_validation->set_message("_validate_credentials", "ユーザー名かパスワードが異なります。");
             return false;
         }
     }
