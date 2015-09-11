@@ -41,7 +41,7 @@ class Pages extends CI_Controller
         $this->load->library("form_validation");
 
         $this->form_validation->set_rules("email", "メールアドレス", "required|trim|valid_email|callback__validate_credentials");
-        $this->form_validation->set_rules("password", "パスワード", "required|md5|trim");
+        $this->form_validation->set_rules("password", "パスワード", "required|sha1|trim");
         if ($this->form_validation->run() !== FALSE) {
             $email = $this->input->post("email");
             $user = $this->users_model->get_users_by_email($email);
