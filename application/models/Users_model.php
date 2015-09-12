@@ -24,12 +24,9 @@ class Users_model extends CI_Model
     public function get_users($id = FALSE)
     {
         if ($id === FALSE) {
-            $this->db->select('id, email, name, password');
-            $this->db->from('users');
             $this->db->order_by('id', 'desc');
+            $query = $this->db->get('users');
 
-            // SQLを実行
-            $query = $this->db->get();
             log_message('info', $this->db->last_query());
             return $query->result_array();
         }
@@ -41,17 +38,30 @@ class Users_model extends CI_Model
     public function get_users_by_email($email = FALSE)
     {
         if ($email === FALSE) {
-            $this->db->select('id, email, name, password');
-            $this->db->from('users');
             $this->db->order_by('id', 'desc');
+            $query = $this->db->get('users');
 
-            // SQLを実行
-            $query = $this->db->get();
             log_message('info', $this->db->last_query());
             return $query->result_array();
         }
 
         $query = $this->db->get_where('users', array('email' => $email));
         return $query->row_array();
+    }
+
+
+    public function save(&$users)
+    {
+        if (!isset($users['id'])) {
+            $users['created_at'] = date('Y/m/d H:i:s');
+            $users['updated_at'] = date('Y/m/d H:i:s');
+            $this->db->insert('users', $users);
+            $users['id'] = $this->db->insert_id();
+        } else {
+            $users['updated_at'] = date('Y/m/d H:i:s');
+            $this->db->where('id', $users['id']);
+            $this->db->update('users', $users);
+        }
+        log_message('info', $this->db->last_query());
     }
 }

@@ -110,7 +110,6 @@ class News extends CI_Controller
         $this->form_validation->set_rules('title', 'タイトル', 'required');
         $this->form_validation->set_rules('text', '内容', 'required');
         if ($this->form_validation->run() !== FALSE) {
-            $this->load->helper('url');
 
             $news['title'] = $this->input->post('title');
             $news['slug'] = url_title($news['title'], 'dash', TRUE);
