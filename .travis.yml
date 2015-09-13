@@ -8,8 +8,15 @@ php:
 before_install:
   - composer self-update
 
+env:
+  - DB=pgsql
+
 before_script:
-    - composer install --dev
+  - composer install --dev
+  - sh -c 'if [ "$DB" = "pgsql" ]; then psql postgres -c "CREATE ROLE root WITH LOGIN PASSWORD 'P@ssw0rd';" fi'
+  - sh -c "if [ '$DB' = 'pgsql' ]; then psql postgres -c 'DROP DATABASE IF EXISTS tutorial;' fi"
+  - sh -c "if [ '$DB' = 'pgsql' ]; then psql postgres -c 'CREATE DATABASE tutorial owner root;' fi"
+  - php cli migrate
 
 script:
   - cd application/tests
