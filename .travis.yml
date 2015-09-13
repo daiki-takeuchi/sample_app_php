@@ -13,7 +13,7 @@ env:
 
 before_script:
   - composer install --dev
-  - sh -c 'if [ "$DB" = "pgsql" ]; then psql postgres -c "CREATE ROLE root WITH LOGIN PASSWORD 'P@ssw0rd';" fi'
+  - psql postgres -c "CREATE ROLE root WITH LOGIN PASSWORD 'P@ssw0rd';"
   - sh -c "if [ '$DB' = 'pgsql' ]; then psql postgres -c 'DROP DATABASE IF EXISTS tutorial;' fi"
   - sh -c "if [ '$DB' = 'pgsql' ]; then psql postgres -c 'CREATE DATABASE tutorial owner root;' fi"
   - php cli migrate
