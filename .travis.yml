@@ -19,5 +19,10 @@ before_script:
   - php cli migrate
 
 script:
+  - mkdir -p build/logs
   - cd application/tests
   - ../../vendor/bin/phpunit --coverage-text
+  - cd ../../
+
+after_script:
+  - php vendor/bin/coveralls.php -v -c .coveralls.yml

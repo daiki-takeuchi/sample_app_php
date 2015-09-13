@@ -5,7 +5,8 @@
 		"codeigniter/framework": "3.0.*",
 		"phpunit/phpunit": "4.8.6",
 		"kenjis/ci-phpunit-test": "1.0.x-dev",
-		"kenjis/codeigniter-cli": "1.0.x-dev"
+		"kenjis/codeigniter-cli": "1.0.x-dev",
+		"satooshi/php-coveralls": "0.1.0"
 	},
 	"require-dev": {
 		"mikey179/vfsStream": "1.1.*"
