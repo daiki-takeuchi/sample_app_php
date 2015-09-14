@@ -65,9 +65,39 @@ class Pages_test extends TestCase
     /**
      * @test
      */
+    public function ログインページに遷移する()
+    {
+        $output = $this->request('GET', ['Pages', 'login']);
+        $this->assertContains('ログインページ', $output);
+    }
+
+    /**
+     * @test
+     */
+    public function ログインしている場合にログインするとホームに遷移()
+    {
+        $user = [
+            'email' => 'email1@example.com',
+            'name' => '名前１',
+            'password' => sha1('email1@example.com'.'password'),
+            'created_at' => date('Y/m/d H:i:s'),
+            'updated_at' => date('Y/m/d H:i:s')
+        ];
+        $data = array(
+            "user" => $user,
+            "is_logged_in" => 1
+        );
+
+        $output = $this->request('GET', ['Pages', 'login']);
+//        $this->assertContains('ようこそホームへ！', $output);
+    }
+
+    /**
+     * @test
+     */
     public function test_method_404()
     {
-        $this->request('GET', ['Page', 'method_not_exist']);
+        $this->request('GET', ['Pages', 'method_not_exist']);
         $this->assertResponseCode(404);
     }
 
