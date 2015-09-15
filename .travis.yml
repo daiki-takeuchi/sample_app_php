@@ -21,8 +21,8 @@ before_script:
 script:
   - mkdir -p build/logs
   - cd application/tests
-  - ../../vendor/bin/phpunit --coverage-clover ../build/logs/clover.xml
+  - ../../vendor/bin/phpunit --coverage-text
   - cd ../../
 
 after_script:
-  - php vendor/bin/coveralls.php -v -c .coveralls.yml
+  - php vendor/bin/coveralls -v

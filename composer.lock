@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "335e84772951a177b7b9b4e3cfac9384",
+    "hash": "52adf4f066e797691934d243af131bfc",
     "packages": [
         {
             "name": "aura/cli",
@@ -370,7 +370,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kenjis/ci-phpunit-test/zipball/87c55b4fca426ea1db1b6144b727f13b0f26712e",
+                "url": "https://api.github.com/repos/kenjis/ci-phpunit-test/zipball/b920effed613dabad12c5ffb7a71ff04af027e92",
                 "reference": "d65db370f871acd026e0ec2cfbdc076434e844ba",
                 "shasum": ""
             },
