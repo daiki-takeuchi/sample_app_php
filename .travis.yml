@@ -21,7 +21,8 @@ before_script:
 script:
   - mkdir -p build/logs
   - cd application/tests
-  - ../../vendor/bin/phpunit --coverage-text
+  - ../../vendor/bin/phpunit
+  - cp -r build ../../build
   - cd ../../
 
 after_script:
