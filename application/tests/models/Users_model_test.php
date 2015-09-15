@@ -159,4 +159,24 @@ class Users_model_test extends TestCase
         // tearDown
         $this->obj->delete($users);
     }
+
+    /**
+     * @test
+     */
+    public function パスワードが違う場合can_log_inでログインできない()
+    {
+        // setUp
+        $users = array(
+            'email' => 'email9@example.com',
+            'name' => '名前９',
+            'password' => sha1('email9@example.com'.'password'),
+            'created_at' => date('Y/m/d H:i:s'),
+            'updated_at' => date('Y/m/d H:i:s')
+        );
+        $this->obj->save($users);
+
+        $this->assertFalse($this->obj->can_log_in('email9@example.com', 'not_exist'));
+        // tearDown
+        $this->obj->delete($users);
+    }
 }
