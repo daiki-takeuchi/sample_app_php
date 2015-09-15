@@ -57,9 +57,11 @@ class Pages extends CI_Controller
 
     public function _validate_credentials()
     {
+        $email = $this->input->post("email");
+        $password = $this->input->post("email");
         $this->load->model("users_model");
 
-        if($this->users_model->can_log_in()) {
+        if($this->users_model->can_log_in($email, $password)) {
             return true;
         } else {
             $this->form_validation->set_message("_validate_credentials", "ユーザー名かパスワードが異なります。");

@@ -8,10 +8,10 @@ class Users_model extends CI_Model
         $this->load->database();
     }
 
-    public function can_log_in(){
+    public function can_log_in($email, $password){
 
-        $this->db->where("email", $this->input->post("email"));
-        $this->db->where("password", sha1($this->input->post("email").$this->input->post("password")));
+        $this->db->where("email", $email);
+        $this->db->where("password", sha1($email.$password));
         $query = $this->db->get("users");
 
         if($query->num_rows() == 1){
@@ -37,14 +37,6 @@ class Users_model extends CI_Model
 
     public function get_users_by_email($email = FALSE)
     {
-        if ($email === FALSE) {
-            $this->db->order_by('id', 'desc');
-            $query = $this->db->get('users');
-
-            log_message('info', $this->db->last_query());
-            return $query->result_array();
-        }
-
         $query = $this->db->get_where('users', array('email' => $email));
         return $query->row_array();
     }
@@ -62,6 +54,13 @@ class Users_model extends CI_Model
             $this->db->where('id', $users['id']);
             $this->db->update('users', $users);
         }
+        log_message('info', $this->db->last_query());
+    }
+
+    public function delete(&$users)
+    {
+        $this->db->where('id', $users['id']);
+        $this->db->delete('users');
         log_message('info', $this->db->last_query());
     }
 }
