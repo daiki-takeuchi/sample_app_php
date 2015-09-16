@@ -8,6 +8,16 @@
  */
 class Pages_test extends TestCase
 {
+
+    public static function setUpBeforeClass()
+    {
+        parent::setUpBeforeClass();
+
+        $CI =& get_instance();
+        $CI->load->library('Seeder');
+        $CI->seeder->call('UsersSeeder');
+    }
+
     /**
      * @test
      */
@@ -76,20 +86,62 @@ class Pages_test extends TestCase
      */
     public function ログインしている場合にログインするとホームに遷移()
     {
-        $user = [
+        $data = [
             'email' => 'email1@example.com',
-            'name' => '名前１',
-            'password' => sha1('email1@example.com'.'password'),
-            'created_at' => date('Y/m/d H:i:s'),
-            'updated_at' => date('Y/m/d H:i:s')
+            'password' => 'password',
         ];
-        $data = array(
-            "user" => $user,
-            "is_logged_in" => 1
-        );
+        // ログインするとホームに遷移する
+        $this->request('POST', ['Pages', 'login'], $data);
+        $this->assertRedirect('/', 302);
 
-        $output = $this->request('GET', ['Pages', 'login']);
-//        $this->assertContains('ようこそホームへ！', $output);
+        // ログイン状態でログイン画面に遷移するとホームに遷移する
+        $this->request('GET', ['Pages', 'login']);
+        $this->assertRedirect('/', 302);
+    }
+
+    /**
+     * @test
+     */
+    public function ログインしている場合にログアウトするとホームに遷移()
+    {
+        $data = [
+            'email' => 'email1@example.com',
+            'password' => 'password',
+        ];
+        // ログインする
+        $this->request('POST', ['Pages', 'login'], $data);
+
+        // ログアウトするとホームに遷移する
+        $this->request('GET', ['Pages', 'logout']);
+        $this->assertRedirect('/', 302);
+    }
+
+    /**
+     * @test
+     */
+    public function パスワードが違う場合はログインできない()
+    {
+        $data = [
+            'email' => 'email1@example.com',
+            'password' => 'bad password',
+        ];
+        // ログインする
+        $output = $this->request('POST', ['Pages', 'login'], $data);
+        $this->assertContains('ユーザー名かパスワードが異なります。', $output);
+    }
+
+    /**
+     * @test
+     */
+    public function 存在しないemailの場合はログインできない()
+    {
+        $data = [
+            'email' => 'not_exist_email@example.com',
+            'password' => 'password',
+        ];
+        // ログインする
+        $output = $this->request('POST', ['Pages', 'login'], $data);
+        $this->assertContains('ユーザー名かパスワードが異なります。', $output);
     }
 
     /**

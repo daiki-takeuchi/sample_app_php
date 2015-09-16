@@ -15,8 +15,9 @@ class Seeder_test extends TestCase
      */
     public function Seederの実行()
     {
+        $expected = 3;
         $this->obj->call('NewsSeeder');
-        $this->assertEquals(3, $this->news_model->get_count_all());
+        $this->assertEquals($expected, $this->news_model->get_count_all());
     }
 
     /**
@@ -24,11 +25,12 @@ class Seeder_test extends TestCase
      */
     public function マジックメソッドの確認()
     {
-        $seeder = new Seeder();
-        $seeder->load;
-//        $expected = 3;
-//        $this->obj->abc = $expected;
-//        $actual = $this->obj->abc;
-//        $this->assertEquals($expected, $actual);
+        $expected = 3;
+        $this->obj->load->model('Users_model');
+        $this->obj->call('UsersSeeder');
+        $this->users_model = $this->CI->Users_model;
+        $sut = $this->users_model->get_users();
+
+        $this->assertEquals($expected, count($sut));
     }
 }
