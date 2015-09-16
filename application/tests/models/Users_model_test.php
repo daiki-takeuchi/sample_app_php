@@ -22,7 +22,7 @@ class Users_model_test extends TestCase
     {
         $this->resetInstance();
         $this->CI->load->model('Users_model');
-        $this->obj = $this->CI->Users_model;
+        $this->users_model = $this->CI->Users_model;
     }
 
     /**
@@ -31,7 +31,7 @@ class Users_model_test extends TestCase
     public function ユーザーを全件取得()
     {
         $expected = 3;
-        $actual = $this->obj->get_users();
+        $actual = $this->users_model->get_users();
         $this->assertEquals($expected, count($actual));
     }
 
@@ -49,15 +49,15 @@ class Users_model_test extends TestCase
             'created_at' => date('Y/m/d H:i:s'),
             'updated_at' => date('Y/m/d H:i:s')
         );
-        $this->obj->save($users);
+        $this->users_model->save($users);
 
         // test
         $expected = $users;
-        $actual = $this->obj->get_users($users['id']);
+        $actual = $this->users_model->get_users($users['id']);
         $this->assertEquals(sort($expected), sort($actual));
 
         // tearDown
-        $this->obj->delete($users);
+        $this->users_model->delete($users);
     }
 
     /**
@@ -66,7 +66,7 @@ class Users_model_test extends TestCase
     public function emaiilを指定してユーザーを取得()
     {
         $expected = 'email1@example.com';
-        $sut = $this->obj->get_users_by_email($expected);
+        $sut = $this->users_model->get_users_by_email($expected);
         $this->assertEquals($expected, $sut['email']);
     }
 
@@ -83,10 +83,10 @@ class Users_model_test extends TestCase
             'created_at' => date('Y/m/d H:i:s'),
             'updated_at' => date('Y/m/d H:i:s')
         );
-        $this->obj->save($users);
+        $this->users_model->save($users);
 
         // tearDown
-        $this->obj->delete($users);
+        $this->users_model->delete($users);
     }
 
     /**
@@ -104,20 +104,20 @@ class Users_model_test extends TestCase
             'created_at' => date('Y/m/d H:i:s'),
             'updated_at' => date('Y/m/d H:i:s')
         );
-        $this->obj->save($users);
+        $this->users_model->save($users);
 
-        $sut = $this->obj->get_users($users['id']);
+        $sut = $this->users_model->get_users($users['id']);
         $sut['name'] = $expected;
 
         // test
-        $this->obj->save($sut);
+        $this->users_model->save($sut);
 
-        $actual = $this->obj->get_users($users['id'])['name'];
+        $actual = $this->users_model->get_users($users['id'])['name'];
 
         $this->assertEquals($expected, $actual);
 
         // tearDown
-        $this->obj->delete($users);
+        $this->users_model->delete($users);
     }
 
     /**
@@ -133,11 +133,11 @@ class Users_model_test extends TestCase
             'created_at' => date('Y/m/d H:i:s'),
             'updated_at' => date('Y/m/d H:i:s')
         );
-        $this->obj->save($users);
+        $this->users_model->save($users);
 
-        $this->assertTrue($this->obj->can_log_in('email7@example.com', 'password'));
+        $this->assertTrue($this->users_model->can_log_in('email7@example.com', 'password'));
         // tearDown
-        $this->obj->delete($users);
+        $this->users_model->delete($users);
     }
 
     /**
@@ -153,11 +153,11 @@ class Users_model_test extends TestCase
             'created_at' => date('Y/m/d H:i:s'),
             'updated_at' => date('Y/m/d H:i:s')
         );
-        $this->obj->save($users);
+        $this->users_model->save($users);
 
-        $this->assertFalse($this->obj->can_log_in('email_not_exist@example.com', 'password'));
+        $this->assertFalse($this->users_model->can_log_in('email_not_exist@example.com', 'password'));
         // tearDown
-        $this->obj->delete($users);
+        $this->users_model->delete($users);
     }
 
     /**
@@ -173,10 +173,10 @@ class Users_model_test extends TestCase
             'created_at' => date('Y/m/d H:i:s'),
             'updated_at' => date('Y/m/d H:i:s')
         );
-        $this->obj->save($users);
+        $this->users_model->save($users);
 
-        $this->assertFalse($this->obj->can_log_in('email9@example.com', 'not_exist'));
+        $this->assertFalse($this->users_model->can_log_in('email9@example.com', 'not_exist'));
         // tearDown
-        $this->obj->delete($users);
+        $this->users_model->delete($users);
     }
 }

@@ -22,7 +22,7 @@ class News_model_test extends TestCase
     {
         $this->resetInstance();
         $this->CI->load->model('News_model');
-        $this->obj = $this->CI->News_model;
+        $this->news_model = $this->CI->News_model;
     }
 
     /**
@@ -35,7 +35,7 @@ class News_model_test extends TestCase
             'limit' => 10,
             'offset' => 0
         );
-        $actual = $this->obj->get_news(FALSE, $limit);
+        $actual = $this->news_model->get_news(FALSE, $limit);
         $this->assertEquals($expected, count($actual));
     }
 
@@ -51,19 +51,21 @@ class News_model_test extends TestCase
             'text' => '単体テスト_text_id指定',
             'slug' => url_title('単体テスト_title_id指定', 'dash', TRUE),
         );
-        $this->obj->save($news);
+        $this->news_model->save($news);
 
-        // test
+        // exercise
         $expected = $news;
         $limit = array(
             'limit' => 1,
             'offset' => 0
         );
-        $actual = $this->obj->get_news($news['id'], $limit);
+        $actual = $this->news_model->get_news($news['id'], $limit);
+
+        // verify
         $this->assertEquals(sort($expected), sort($actual));
 
         // tearDown
-        $this->obj->delete($news);
+        $this->news_model->delete($news);
     }
 
     /**
@@ -72,7 +74,7 @@ class News_model_test extends TestCase
     public function ニュースの件数を取得()
     {
         $expected = 3;
-        $actual = $this->obj->get_count_all();
+        $actual = $this->news_model->get_count_all();
         $this->assertEquals($expected, $actual);
     }
 
@@ -87,10 +89,10 @@ class News_model_test extends TestCase
             'text' => '単体テスト_text',
             'slug' => url_title('単体テスト_title', 'dash', TRUE),
         );
-        $this->obj->save($news);
+        $this->news_model->save($news);
 
         // tearDown
-        $this->obj->delete($news);
+        $this->news_model->delete($news);
 
     }
 
@@ -107,23 +109,23 @@ class News_model_test extends TestCase
             'text' => '単体テスト_text_更新前',
             'slug' => url_title('単体テスト_title_更新前', 'dash', TRUE),
         );
-        $this->obj->save($news);
+        $this->news_model->save($news);
 
         $limit = array(
             'limit' => 1,
             'offset' => 0
         );
-        $sut = $this->obj->get_news($news['id'], $limit);
+        $sut = $this->news_model->get_news($news['id'], $limit);
         $sut['title'] = $expected;
 
         // test
-        $this->obj->save($sut);
+        $this->news_model->save($sut);
 
-        $actual = $this->obj->get_news($news['id'], $limit)['title'];
+        $actual = $this->news_model->get_news($news['id'], $limit)['title'];
 
         $this->assertEquals($expected, $actual);
 
         // tearDown
-        $this->obj->delete($news);
+        $this->news_model->delete($news);
     }
 }
