@@ -40,6 +40,141 @@ class Users_test extends TestCase
 
         // Verify
         $output = $this->request('GET', ['Users', 'view', $user['id'] + 1]);
+        // TODO 存在しませんページはこれから作る
 //        $this->assertContains($user['name'], $output);
+    }
+
+    /**
+     * @test
+     */
+    public function 新規ユーザー登録画面に遷移できる()
+    {
+        // Verify
+        $output = $this->request('GET', ['Users', 'create']);
+        $this->assertContains('ユーザー登録', $output);
+    }
+
+    /**
+     * @test
+     */
+    public function ユーザー登録できること()
+    {
+        $before = count($this->users_model->get_users());
+
+        // Exercise
+        $post = [
+            'email' => 'email_test_user@example.com',
+            'name' => 'ユーザー登録テスト',
+            'password' => 'password',
+            'password_confirmation' => 'password',
+        ];
+        $this->request('POST', ['Users', 'create'], $post);
+
+        $after = count($this->users_model->get_users());
+
+        // 更新前の件数に1件追加されている
+        $this->assertEquals($before + 1, $after);
+
+        // TearDown
+        $this->request('GET', ['Pages', 'logout']);
+    }
+
+    /**
+     * @test
+     */
+    public function バリデーションチェックの確認()
+    {
+        // Setup
+        $before = count($this->users_model->get_users());
+
+        // 必須チェック
+        $post = [
+            'email' => '',
+            'name' => '',
+            'password' => '',
+            'password_confirmation' => '',
+        ];
+        $output = $this->request('POST', ['Users', 'create'], $post);
+        $this->assertContains('メールアドレス 欄は必須です。', $output);
+        $this->assertContains('名前 欄は必須です。', $output);
+        $this->assertContains('パスワード 欄は必須です。', $output);
+        $this->assertContains('パスワードの確認 欄は必須です。', $output);
+
+        // メールアドレス妥当性チェック
+        $post = [
+            'email' => 'a',
+            'name' => 'ユーザー登録テスト',
+            'password' => 'password',
+            'password_confirmation' => 'password',
+        ];
+        $output = $this->request('POST', ['Users', 'create'], $post);
+        $this->assertContains('メールアドレス 欄には正しいEmailアドレスを入力する必要があります。', $output);
+
+        // パスワード確認チェック
+        $post = [
+            'email' => 'a',
+            'name' => 'ユーザー登録テスト',
+            'password' => 'password',
+            'password_confirmation' => 'bad_password_conf',
+        ];
+        $output = $this->request('POST', ['Users', 'create'], $post);
+        $this->assertContains('パスワード 欄が パスワードの確認 欄と一致しません。', $output);
+
+        $after = count($this->users_model->get_users());
+
+        // 更新前後で件数が変わらない
+        $this->assertEquals($before, $after);
+    }
+
+    /**
+     * @test
+     */
+    public function ユーザー編集画面に遷移できる()
+    {
+        // SetUp データ
+        $user = array(
+            'email' => 'email_user_edit@example.com',
+            'name' => 'ユーザー編集画面に遷移できる',
+            'password' => sha1('email_user_edit@example.com'.'password'),
+            'created_at' => date('Y/m/d H:i:s'),
+            'updated_at' => date('Y/m/d H:i:s')
+        );
+        $this->users_model->save($user);
+
+        // Verify
+        $output = $this->request('GET', ['Users', 'edit', $user['id']]);
+        $this->assertContains('ユーザー編集', $output);
+    }
+
+    /**
+     * @test
+     */
+    public function ユーザーを編集できる()
+    {
+        // SetUp データ
+        $user = array(
+            'email' => 'email_user_edit_before@example.com',
+            'name' => '変更前',
+            'password' => sha1('email_user_edit_before@example.com'.'password'),
+            'created_at' => date('Y/m/d H:i:s'),
+            'updated_at' => date('Y/m/d H:i:s')
+        );
+        $this->users_model->save($user);
+
+        $post = [
+            'email' => 'email_user_edit_after@example.com',
+            'name' => '変更後',
+            'password' => 'password',
+            'password_confirmation' => 'password',
+        ];
+        // Exercise
+        $this->request('POST', ['Users', 'edit' ,$user['id']], $post);
+        $sut = $this->users_model->get_users($user['id']);
+
+        // Verify
+        $this->assertEquals('email_user_edit_after@example.com', $sut['email']);
+        $this->assertEquals('変更後', $sut['name']);
+        // 詳細ページにリダイレクトする
+        $this->assertRedirect('/users/'.$user['id']);
     }
 }

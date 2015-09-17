@@ -187,7 +187,7 @@ class News_test extends TestCase
     /**
      * @test
      */
-    public function タイトルが入力してない場合は登録できない()
+    public function タイトルを入力してない場合は登録できない()
     {
         // Setup ログイン
         $data = [
@@ -216,7 +216,7 @@ class News_test extends TestCase
     /**
      * @test
      */
-    public function 内容が入力してない場合は登録できない()
+    public function 内容を入力してない場合は登録できない()
     {
         // Setup ログイン
         $data = [
@@ -272,6 +272,7 @@ class News_test extends TestCase
         $this->news_model->delete($news);
         $this->request('GET', ['Pages', 'logout']);
     }
+
     /**
      * @test
      */
