@@ -16,6 +16,8 @@ before_script:
   - psql postgres -c "CREATE ROLE root WITH LOGIN PASSWORD 'P@ssw0rd';"
   - psql postgres -c 'DROP DATABASE IF EXISTS tutorial;'
   - psql postgres -c 'CREATE DATABASE tutorial owner root;'
+  - psql postgres -c 'DROP DATABASE IF EXISTS tutorial_test;'
+  - psql postgres -c 'CREATE DATABASE tutorial_test owner root;'
   - php cli migrate
 
 script:
