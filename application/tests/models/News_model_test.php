@@ -111,17 +111,13 @@ class News_model_test extends TestCase
         );
         $this->news_model->save($news);
 
-        $limit = array(
-            'limit' => 1,
-            'offset' => 0
-        );
-        $sut = $this->news_model->get_news($news['id'], $limit);
+        $sut = $this->news_model->get_news($news['id']);
         $sut['title'] = $expected;
 
         // test
         $this->news_model->save($sut);
 
-        $actual = $this->news_model->get_news($news['id'], $limit)['title'];
+        $actual = $this->news_model->get_news($news['id'])['title'];
 
         $this->assertEquals($expected, $actual);
 

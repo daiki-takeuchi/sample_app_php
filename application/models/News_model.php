@@ -8,11 +8,13 @@ class News_model extends CI_Model
         $this->load->database();
     }
 
-    public function get_news($id = FALSE, $limit = array())
+    public function get_news($id = FALSE, $limit = NULL)
     {
         if ($id === FALSE) {
             $this->db->order_by('id', 'desc');
-            $this->db->limit($limit['limit'], $limit['offset']);
+            if(isset($limit)){
+                $this->db->limit($limit['limit'], $limit['offset']);
+            }
 
             // SQLを実行
             $query = $this->db->get('news');
