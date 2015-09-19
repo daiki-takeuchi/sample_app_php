@@ -6,16 +6,16 @@ class News extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        // ログインしていない場合は404
-        if( ! $this->session->userdata("is_logged_in")) {
-            show_404();
-        }
         // データベース接続モデルをロード
         $this->load->model('news_model');
         $this->load->helper('url_helper');
         $this->load->helper('url');
         $this->smarty->template_dir = APPPATH . 'views';
         $this->smarty->compile_dir = APPPATH . 'views/templates_c';
+        // ログインしていない場合はホームに移動する
+        if( ! $this->session->userdata("is_logged_in")) {
+            redirect(base_url());
+        }
     }
 
     public function index()
@@ -50,9 +50,10 @@ class News extends CI_Controller
         // 指定された記事を呼び出す
         $data['news_item'] = $this->news_model->get_news($id);
 
-        // 記事が見つからない場合は404エラー
+        // 記事が見つからない場合はNot Foundページ
         if (empty($data['news_item'])) {
-            show_404();
+            $this->smarty->display('news/not_found.tpl');
+            return;
         }
 
         $data['title'] = $data['news_item']['title'];

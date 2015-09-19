@@ -23,10 +23,10 @@ class News_test extends TestCase
     /**
      * @test
      */
-    public function ログインせずnewsページへ移動した場合はアクセス禁止ページを表示()
+    public function ログインせずnewsページへ移動した場合はホームに移動する()
     {
-        // TODO アクセス禁止ページはこれから作る予定
         $this->request('GET', ['News', 'index']);
+        $this->assertRedirect('/');
     }
 
     /**
@@ -127,8 +127,8 @@ class News_test extends TestCase
         // Exercise
         $output = $this->request('GET', ['News', 'view' ,$news['id'] + 1]);
 
-        // Verify TODO
-//        $this->assertContains('記事が存在しません。', $output);
+        // Verify
+        $this->assertContains('News Not Found', $output);
 
         // TearDown ログアウト
         $this->news_model->delete($news);

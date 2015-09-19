@@ -41,7 +41,7 @@ class Pages_test extends TestCase
      */
     public function 引数に存在しないページを指定した場合は404へ遷移()
     {
-        $output = $this->request('GET', ['Pages', 'index', 'aaa']);
+        $this->request('GET', ['Pages', 'index', 'aaa']);
         $this->assertResponseCode(404);
     }
 
@@ -142,15 +142,6 @@ class Pages_test extends TestCase
         // ログインする
         $output = $this->request('POST', ['Pages', 'login'], $data);
         $this->assertContains('ユーザー名かパスワードが異なります。', $output);
-    }
-
-    /**
-     * @test
-     */
-    public function test_method_404()
-    {
-        $this->request('GET', ['Pages', 'method_not_exist']);
-        $this->assertResponseCode(404);
     }
 
     /**

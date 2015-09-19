@@ -55,5 +55,5 @@ $route['news/(:num)'] = 'news/view/$1';
 $route['news'] = 'news';
 $route['users/(:num)'] = 'users/view/$1';
 $route['users'] = 'users';
-$route['404_override'] = '';
+$route['404_override'] = ENVIRONMENT === 'testing' ? '' : 'error/error_404';
 $route['translate_uri_dashes'] = FALSE;

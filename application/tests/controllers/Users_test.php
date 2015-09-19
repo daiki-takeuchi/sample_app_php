@@ -40,8 +40,7 @@ class Users_test extends TestCase
 
         // Verify
         $output = $this->request('GET', ['Users', 'view', $user['id'] + 1]);
-        // TODO 存在しませんページはこれから作る
-//        $this->assertContains($user['name'], $output);
+        $this->assertContains('User Not Found', $output);
     }
 
     /**

@@ -16,7 +16,8 @@ class Users extends CI_Controller
         $data['user_item'] = $this->users_model->get_users($id);
 
         if (empty($data['user_item'])) {
-            show_404();
+            $this->smarty->display('users/not_found.tpl');
+            return;
         }
 
         $data['title'] = $data['user_item']['name'];
