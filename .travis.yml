@@ -1,32 +1,35 @@
 language: php
-
 php:
-  - 5.4
-  - 5.5
-  - 5.6
-
+- 5.4
+- 5.5
+- 5.6
 before_install:
-  - composer self-update
-
+- composer self-update
 env:
-  - DB=pgsql
-
+- DB=pgsql
 before_script:
-  - composer install --dev
-  - psql postgres -c "CREATE ROLE root WITH LOGIN PASSWORD 'P@ssw0rd';"
-  - psql postgres -c 'DROP DATABASE IF EXISTS tutorial;'
-  - psql postgres -c 'CREATE DATABASE tutorial owner root;'
-  - psql postgres -c 'DROP DATABASE IF EXISTS tutorial_test;'
-  - psql postgres -c 'CREATE DATABASE tutorial_test owner root;'
-  - php cli migrate
-
+- composer install --dev
+- psql postgres -c "CREATE ROLE root WITH LOGIN PASSWORD 'P@ssw0rd';"
+- psql postgres -c 'DROP DATABASE IF EXISTS tutorial;'
+- psql postgres -c 'CREATE DATABASE tutorial owner root;'
+- psql postgres -c 'DROP DATABASE IF EXISTS tutorial_test;'
+- psql postgres -c 'CREATE DATABASE tutorial_test owner root;'
+- php cli migrate
 script:
-  - mkdir -p build/logs
-  - cd application/tests
-  - ../../vendor/bin/phpunit --coverage-clover ../build/logs/clover.xml
-  - cd ../../
-
+- mkdir -p build/logs
+- cd application/tests
+- "../../vendor/bin/phpunit --coverage-clover ../build/logs/clover.xml"
+- cd ../../
 after_script:
-  - php vendor/bin/coveralls -v -c .coveralls.yml
-  - CODECLIMATE_REPO_TOKEN=c27748a15d6c7c79ab8acc2387c67a29bcd0e4aafef6ad4253a06a9bb1831ae6 vendor/bin/test-reporter --stdout > codeclimate.json
-  - "curl -X POST -d @codeclimate.json -H 'Content-Type: application/json' -H 'User-Agent: Code Climate (PHP Test Reporter v0.1.1)' https://codeclimate.com/test_reports"
+- php vendor/bin/coveralls -v -c .coveralls.yml
+- CODECLIMATE_REPO_TOKEN=c27748a15d6c7c79ab8acc2387c67a29bcd0e4aafef6ad4253a06a9bb1831ae6
+  vendor/bin/test-reporter --stdout > codeclimate.json
+- 'curl -X POST -d @codeclimate.json -H ''Content-Type: application/json'' -H ''User-Agent:
+  Code Climate (PHP Test Reporter v0.1.1)'' https://codeclimate.com/test_reports'
+deploy:
+  provider: heroku
+  api_key:
+    secure: vIALeVljjGlCMzfsDtlJUWabxDGsI/hjXBlW9kig/+z3bxHk4QHOOTprBAUbau+GKQnPmpsz04/pGOX8BkPVE3tgLP9h8jO1U+Vlbb89CltTjZl7A08WeNk/OCjx+WQs1JH5ctgYxlBR7xWw3s48lTymyhIcgktwyDGF7qeNpgCSMctm9TT3tmAWMvInKCCvyOS6FCiki8EgoRgXsXE+JHTT/945qulZqvon+hP0I0qN4jslwfTAu5Q7CvOQP11ej1k3t2ydjFtz7SQhD4QWqGDSFqBfIbKhQ4dxCq7eFaDOl5AtjaDROlY8FqUUBOmvaUrY+xk1RkY46E+aIGTxL3dYiAzEd/ZRIwYm2M+O5SkN2hlKlg6vwlzncHtPwN8Ibcmdk73Rni0OM8Z/o8BnIYetzyggv6J23DMimEIWFqnk0zbBIJwUv/0vbuGFULC764HNK5OAuO2apCII8SmocYea/4V+I+XmdfFMKlahju98d9riJ+46IPiS9fXIAtfSLkLqDiNzMJIUe5it7aHOGqUgJP10pI2DgmsVAyaJhSUEQ7GgDbD9pKzcv45EL4r2z0XnZhvpJdmkz+Z9CiG3y3ZdS6mH9tJytxRsLM35xRtnii1w0ug9ZQT4kweFzfrPCt5KvMIXHROjLJ+cpj3qLtJ5TkP+SLcKCCNgkIN2Tgs=
+  app: protected-ocean-8451
+  on:
+    repo: daiki-takeuchi/sample_app_php
