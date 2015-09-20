@@ -219,3 +219,19 @@ footer ul li {
     padding: 14px 15px 10px 15px;
     text-align: left;
 }
+
+#news_list .created_at {
+    border-bottom: solid 1px #999;
+    color: #999;
+}
+
+#news_list h3 {
+    letter-spacing: -1px;
+    font: 20px Helvetica, Arial, sans-serif;
+    font-weight: bold;
+}
+
+#news_list .list-group-item-text {
+    max-height: 35px;
+    overflow: hidden;
+}
