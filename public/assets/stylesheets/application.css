@@ -70,9 +70,13 @@ p {
 }
 
 header {
-    margin-top: -8px;
+    margin-top: -10px;
     border-top: 1px solid #eaeaea;
     color: #999;
+}
+
+.jumbotron {
+    background-image: url("");
 }
 
 .home .col-lg-4 {
@@ -173,11 +177,13 @@ footer a:hover {
 
 footer small {
     float: left;
+    margin-left: 25px;
 }
 
 footer ul {
     float: right;
     list-style: none;
+    margin-right: 25px;
 }
 
 footer ul li {
