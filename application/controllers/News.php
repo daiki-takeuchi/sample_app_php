@@ -8,6 +8,7 @@ class News extends CI_Controller
         parent::__construct();
         // データベース接続モデルをロード
         $this->load->model('news_model');
+        $this->load->model('users_model');
         $this->load->helper('url_helper');
         $this->load->helper('url');
         $this->smarty->template_dir = APPPATH . 'views';
@@ -49,6 +50,7 @@ class News extends CI_Controller
     {
         // 指定された記事を呼び出す
         $data['news_item'] = $this->news_model->get_news($id);
+        $data['author'] = $this->users_model->get_users($data['news_item']['author_id'])['name'];
 
         // 記事が見つからない場合はNot Foundページ
         if (empty($data['news_item'])) {
@@ -72,10 +74,11 @@ class News extends CI_Controller
         $this->load->helper('form');
         $this->load->library('form_validation');
 
-        $news = $this->_get_news($id);
+        $news = NULL;
         if ($id === NULL) {
             $data['title'] = 'ニュース登録';
         } else {
+            $news = $this->_get_news($id);
             $data['title'] = 'ニュース編集';
         }
 
@@ -114,6 +117,7 @@ class News extends CI_Controller
 
             $news['title'] = $this->input->post('title');
             $news['text'] = $this->input->post('text');
+            $news['author_id'] = $this->session->userdata('user')['id'];
 
             $this->news_model->save($news);
             redirect('/news/' . $news['id'], 'refresh');

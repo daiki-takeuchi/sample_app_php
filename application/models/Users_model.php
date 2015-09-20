@@ -14,7 +14,7 @@ class Users_model extends CI_Model
         $this->db->where("password", sha1($email.$password));
         $query = $this->db->get("users");
 
-        if($query->num_rows() == 1){
+        if($query->num_rows() === 1){
             return true;
         }else{
             return false;
@@ -44,13 +44,12 @@ class Users_model extends CI_Model
 
     public function save(&$users)
     {
+        $users['updated_at'] = date('Y/m/d H:i:s');
         if (!isset($users['id'])) {
             $users['created_at'] = date('Y/m/d H:i:s');
-            $users['updated_at'] = date('Y/m/d H:i:s');
             $this->db->insert('users', $users);
             $users['id'] = $this->db->insert_id();
         } else {
-            $users['updated_at'] = date('Y/m/d H:i:s');
             $this->db->where('id', $users['id']);
             $this->db->update('users', $users);
         }

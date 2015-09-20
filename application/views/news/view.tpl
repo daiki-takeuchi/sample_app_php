@@ -15,6 +15,9 @@
                 <div class="panel-body">
                     {$news_item['text']|escape|nl2br|strip:""}
                 </div>
+                <div class="panel-body">
+                    作成者：{$author|escape}
+                </div>
             </div>
         </div>
     </div>
