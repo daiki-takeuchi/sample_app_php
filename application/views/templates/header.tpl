@@ -1,8 +1,17 @@
 <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
     <div class="container-fluid">
-        <a id="logo" href="{site_url}">ロゴ</a>
+        <div class="navbar-header">
+            <a class="navbar-brand" id="logo" href="{site_url}">ロゴ</a>
 
-        <div class="navbar-collapse collapse">
+            <!--トグルボタン-->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav-content">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <div id="nav-content" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="{site_url}"><span class="glyphicon glyphicon-home"></span>　ホーム</a></li>
                 {if isset($smarty.session.is_logged_in) && $smarty.session.is_logged_in === 1}
