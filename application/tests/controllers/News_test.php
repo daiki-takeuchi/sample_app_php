@@ -89,7 +89,6 @@ class News_test extends TestCase
         $news = array(
             'title' => '単体テスト_title_ニュース詳細遷移',
             'text' => '単体テスト_text_ニュース詳細遷移',
-            'slug' => url_title('単体テスト_title_ニュース詳細遷移', 'dash', TRUE),
         );
         $this->news_model->save($news);
 
@@ -120,7 +119,6 @@ class News_test extends TestCase
         $news = array(
             'title' => '単体テスト_title_ニュース詳細遷移',
             'text' => '単体テスト_text_ニュース詳細遷移',
-            'slug' => url_title('単体テスト_title_ニュース詳細遷移', 'dash', TRUE),
         );
         $this->news_model->save($news);
 
@@ -258,7 +256,6 @@ class News_test extends TestCase
         $news = array(
             'title' => '単体テスト_title_ニュース編集遷移',
             'text' => '単体テスト_text_ニュース編集遷移',
-            'slug' => url_title('単体テスト_title_ニュース詳細遷移', 'dash', TRUE),
         );
         $this->news_model->save($news);
 
@@ -289,7 +286,6 @@ class News_test extends TestCase
         $news = array(
             'title' => 'タイトル変更前',
             'text' => '内容変更前',
-            'slug' => url_title('タイトル変更前', 'dash', TRUE),
         );
         $this->news_model->save($news);
 
@@ -327,7 +323,6 @@ class News_test extends TestCase
         $news = array(
             'title' => '単体テスト_title_削除用',
             'text' => '単体テスト_text_削除用',
-            'slug' => url_title('単体テスト_title_削除用', 'dash', TRUE),
         );
         $this->news_model->save($news);
 

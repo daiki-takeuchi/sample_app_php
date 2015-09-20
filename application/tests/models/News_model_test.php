@@ -49,7 +49,6 @@ class News_model_test extends TestCase
         $news = array(
             'title' => '単体テスト_title_id指定',
             'text' => '単体テスト_text_id指定',
-            'slug' => url_title('単体テスト_title_id指定', 'dash', TRUE),
         );
         $this->news_model->save($news);
 
@@ -87,7 +86,6 @@ class News_model_test extends TestCase
         $news = array(
             'title' => '単体テスト_title',
             'text' => '単体テスト_text',
-            'slug' => url_title('単体テスト_title', 'dash', TRUE),
         );
         $this->news_model->save($news);
 
@@ -107,7 +105,6 @@ class News_model_test extends TestCase
         $news = array(
             'title' => '単体テスト_title_更新前',
             'text' => '単体テスト_text_更新前',
-            'slug' => url_title('単体テスト_title_更新前', 'dash', TRUE),
         );
         $this->news_model->save($news);
 

@@ -113,7 +113,6 @@ class News extends CI_Controller
         if ($this->form_validation->run() !== FALSE) {
 
             $news['title'] = $this->input->post('title');
-            $news['slug'] = url_title($news['title'], 'dash', TRUE);
             $news['text'] = $this->input->post('text');
 
             $this->news_model->save($news);
