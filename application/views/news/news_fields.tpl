@@ -7,7 +7,7 @@
         </div>
         <div class="from-group">
             <label for="text">内容</label>
-            <textarea class="form-control" name="text" rows="3"
+            <textarea class="form-control" name="text" rows="18"
                       placeholder="ニュースの内容を入力して下さい。">{if isset($news_item['text'])}{$news_item['text']}{/if}</textarea>
         </div>
     </div>

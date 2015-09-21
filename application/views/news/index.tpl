@@ -19,7 +19,7 @@
                         </h3>
 
                         <p class="list-group-item-text">
-                            {$news_item['text']|escape|nl2br|strip:""}
+                            {$news_item['text']|escape|nl2br}
                         </p>
                     </a>
                 {/foreach}

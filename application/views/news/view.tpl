@@ -4,19 +4,21 @@
     {{$title}}
 {/block}
 
+{block name=jumbotron}
+    <header id="news_title" class="jumbotron">
+        <div class="container">
+            <h1>{$news_item['title']|escape}</h1>
+            <div class="right">{$news_item['created_at']}</div>
+            <div class="right">{$author|escape}</div>
+        </div>
+    </header>
+{/block}
 {block name=main_contents}
-    <h1>ニュース詳細</h1>
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    {$news_item['title']|escape}
-                </div>
                 <div class="panel-body">
-                    {$news_item['text']|escape|nl2br|strip:""}
-                </div>
-                <div class="panel-body">
-                    作成者：{$author|escape}
+                    {$news_item['text']|escape|nl2br}
                 </div>
             </div>
         </div>
