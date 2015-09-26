@@ -164,7 +164,7 @@ class News_test extends TestCase
         ];
         $this->request('POST', ['Pages', 'login'], $data);
 
-        $before = count($this->news_model->get_news());
+        $before = count($this->news_model->find());
 
         // Exercise
         $news = [
@@ -173,7 +173,7 @@ class News_test extends TestCase
         ];
         $this->request('POST', ['News', 'create'], $news);
 
-        $after = count($this->news_model->get_news());
+        $after = count($this->news_model->find());
 
         // 更新前の件数に1件追加されている
         $this->assertEquals($before + 1, $after);
@@ -295,7 +295,7 @@ class News_test extends TestCase
         ];
         // Exercise
         $this->request('POST', ['News', 'edit' ,$news['id']], $post);
-        $sut = $this->news_model->get_news($news['id']);
+        $sut = $this->news_model->find($news['id']);
 
         // Verify
         $this->assertEquals('タイトル変更後', $sut['title']);
@@ -326,11 +326,11 @@ class News_test extends TestCase
         );
         $this->news_model->save($news);
 
-        $before = count($this->news_model->get_news());
+        $before = count($this->news_model->find());
 
         $this->request('GET', ['News', 'delete', $news['id']]);
 
-        $after = count($this->news_model->get_news());
+        $after = count($this->news_model->find());
 
         // 更新前の件数に1件削除されている
         $this->assertEquals($before - 1, $after);

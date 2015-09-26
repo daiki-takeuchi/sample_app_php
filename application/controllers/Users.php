@@ -1,29 +1,26 @@
 <?php
 
-class Users extends CI_Controller
+class Users extends MY_Controller
 {
     public function __construct()
     {
         parent::__construct();
         $this->load->model('users_model');
-        $this->load->helper('url');
-        $this->smarty->template_dir = APPPATH . 'views';
-        $this->smarty->compile_dir = APPPATH . 'views/templates_c';
     }
 
     public function view($id = NULL)
     {
-        $data['user_item'] = $this->users_model->get_users($id);
+        $data['user_item'] = $this->users_model->find($id);
 
         if (empty($data['user_item'])) {
-            $this->smarty->display('users/not_found.tpl');
+            $this->display('users/not_found.tpl');
             return;
         }
 
         $data['title'] = $data['user_item']['name'];
 
         $this->smarty->assign($data);
-        $this->smarty->display('users/view.tpl');
+        $this->display('users/view.tpl');
 
     }
 
@@ -46,7 +43,7 @@ class Users extends CI_Controller
         $data['user_item'] = $user;
 
         $this->smarty->assign($data);
-        $this->smarty->display('users/user_form.tpl');
+        $this->display('users/user_form.tpl');
     }
 
     private function _get_user($id = NULL)
@@ -54,7 +51,7 @@ class Users extends CI_Controller
         if ($id === NULL) {
             $user = array();
         } else {
-            $user = $this->users_model->get_users($id);
+            $user = $this->users_model->find($id);
         }
         return $user;
     }

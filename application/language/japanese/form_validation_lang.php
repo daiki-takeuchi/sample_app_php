@@ -1,23 +1,34 @@
 <?php
 
-$lang['required'] 			= "%s 欄は必須です。";
-$lang['isset']				= "%s 欄は空欄にできません。";
-$lang['valid_email']		= "%s 欄には正しいEmailアドレスを入力する必要があります。";
-$lang['valid_emails'] 		= "%s 欄には正しいEmailアドレスを入力する必要があります。";
-$lang['valid_url'] 			= "%s 欄には正しいURLを入力する必要があります。";
-$lang['valid_ip'] 			= "%s 欄には正しいIPアドレスを入力する必要があります。";
-$lang['min_length']			= "%s 欄は最低 %s 文字以上でなければなりません。";
-$lang['max_length']			= "%s 欄は %s 文字を超えてはいけません。";
-$lang['exact_length']		= "%s 欄は %s 文字でなければなりません。";
-$lang['alpha']				= "%s 欄には、半角アルファベット以外は入力できません。";
-$lang['alpha_numeric']		= "%s 欄には、半角英数字以外は入力できません。";
-$lang['alpha_dash']			= "%s 欄には、半角英数字、アンダースコア(_)、ハイフン(-)以外は入力できません。";
-$lang['numeric']			= "%s 欄には、数字以外は入力できません。";
-$lang['is_numeric']			= "%s 欄には、数値以外は入力できません。";
-$lang['integer']			= "%s 欄には、整数以外は入力できません。";
-$lang['matches']			= "%s 欄が %s 欄と一致しません。";
-$lang['is_natural']			= "%s 欄には、正の整数以外は入力できません。";
-$lang['is_natural_no_zero']	= "%s 欄には、0より大きい整数以外は入力できません。";
+$lang['form_validation_required'] 			= '{field} 欄は必須です。';
+$lang['form_validation_isset']				= '{field} 欄は空欄にできません。';
+$lang['form_validation_valid_email']		= '{field} 欄には正しいEmailアドレスを入力する必要があります。';
+$lang['form_validation_valid_emails'] 		= '{field} 欄には正しいEmailアドレスを入力する必要があります。';
+$lang['form_validation_valid_url'] 			= '{field} 欄には正しいURLを入力する必要があります。';
+$lang['form_validation_valid_ip'] 			= '{field} 欄には正しいIPアドレスを入力する必要があります。';
+$lang['form_validation_min_length']			= '{field} 欄は最低 param 文字以上でなければなりません。';
+$lang['form_validation_max_length']			= '{field} 欄は {param} 文字を超えてはいけません。';
+$lang['form_validation_exact_length']		= '{field} 欄は {field} 文字でなければなりません。';
+$lang['form_validation_alpha']				= '{field} 欄には、半角アルファベット以外は入力できません。';
+$lang['form_validation_alpha_numeric']		= '{field} 欄には、半角英数字以外は入力できません。';
+$lang['form_validation_alpha_numeric_spaces']	= '{field} 欄には、半角英数字とスペース以外は入力できません。';
+$lang['form_validation_alpha_dash']			= '{field} 欄には、半角英数字、アンダースコア(_)、ハイフン(-)以外は入力できません。';
+$lang['form_validation_numeric']			= '{field} 欄には、数字以外は入力できません。';
+$lang['form_validation_is_numeric']			= '{field} 欄には、数値以外は入力できません。';
+$lang['form_validation_integer']			= '{field} 欄には、整数以外は入力できません。';
+$lang['form_validation_regex_match']		= '{field} 欄が 正しい形式で入力する必要があります。';
+$lang['form_validation_matches']			= '{field} 欄が {param} 欄と一致しません。';
+$lang['form_validation_differs']		= 'The {field} field must differ from the {param} field.';
+$lang['form_validation_is_unique'] 		= 'The {field} field must contain a unique value.';
+$lang['form_validation_is_natural']			= '{field} 欄には、正の整数以外は入力できません。';
+$lang['form_validation_is_natural_no_zero']	= '{field} 欄には、0より大きい整数以外は入力できません。';
+$lang['form_validation_decimal']		= 'The {field} field must contain a decimal number.';
+$lang['form_validation_less_than']		= 'The {field} field must contain a number less than {param}.';
+$lang['form_validation_less_than_equal_to']	= 'The {field} field must contain a number less than or equal to {param}.';
+$lang['form_validation_greater_than']		= 'The {field} field must contain a number greater than {param}.';
+$lang['form_validation_greater_than_equal_to']	= 'The {field} field must contain a number greater than or equal to {param}.';
+$lang['form_validation_error_message_not_set']	= 'Unable to access an error message corresponding to your field name {field}.';
+$lang['form_validation_in_list']		= 'The {field} field must be one of: {param}.';
 
 
 /* End of file form_validation_lang.php */

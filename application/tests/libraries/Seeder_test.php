@@ -29,7 +29,7 @@ class Seeder_test extends TestCase
         $this->obj->load->model('Users_model');
         $this->obj->call('UsersSeeder');
         $this->users_model = $this->CI->Users_model;
-        $sut = $this->users_model->get_users();
+        $sut = $this->users_model->find();
 
         $this->assertEquals($expected, count($sut));
     }

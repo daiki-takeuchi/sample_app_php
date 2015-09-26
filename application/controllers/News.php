@@ -1,6 +1,6 @@
 <?php
 
-class News extends CI_Controller
+class News extends MY_Controller
 {
 
     public function __construct()
@@ -11,8 +11,6 @@ class News extends CI_Controller
         $this->load->model('users_model');
         $this->load->helper('url_helper');
         $this->load->helper('url');
-        $this->smarty->template_dir = APPPATH . 'views';
-        $this->smarty->compile_dir = APPPATH . 'views/templates_c';
         // ログインしていない場合はホームに移動する
         if( ! $this->session->userdata("is_logged_in")) {
             redirect(base_url());
@@ -21,24 +19,18 @@ class News extends CI_Controller
 
     public function index()
     {
-        $limit = array(
-            'limit' => 10,
-            'offset' => $this->uri->segment(3 ,0)
-        );
+        $offset = $this->uri->segment(3 ,0);
         // 登録されているデータを全件取得
-        $data['news'] = $this->news_model->get_news(FALSE, $limit);
+        $data['news'] = $this->news_model->get_news($offset);
 
         // paginationの作成
-        $this->load->library('Generate_pagination');
-        $total = $this->news_model->get_count_all();
-        $path = base_url() . "/news/pages";
-        $data['pagination'] = $this->generate_pagination->get_links($path, $total, $limit['limit']);
+        $data['pagination'] = $this->news_model->get_pagination();
 
         $data['title'] = 'ニュース | サンプルアプリケーション ';
 
         // 各種viewを呼び出す
         $this->smarty->assign($data);
-        $this->smarty->display('news/index.tpl');
+        $this->display('news/index.tpl');
     }
 
     public function pages()
@@ -49,19 +41,19 @@ class News extends CI_Controller
     public function view($id = NULL)
     {
         // 指定された記事を呼び出す
-        $data['news_item'] = $this->news_model->get_news($id);
-        $data['author'] = $this->users_model->get_users($data['news_item']['author_id'])['name'];
+        $data['news_item'] = $this->news_model->find($id);
+        $data['author'] = $this->users_model->find($data['news_item']['author_id'])['name'];
 
         // 記事が見つからない場合はNot Foundページ
         if (empty($data['news_item'])) {
-            $this->smarty->display('news/not_found.tpl');
+            $this->display('news/not_found.tpl');
             return;
         }
 
         $data['title'] = $data['news_item']['title'];
 
         $this->smarty->assign($data);
-        $this->smarty->display('news/view.tpl');
+        $this->display('news/view.tpl');
     }
 
     public function create()
@@ -89,13 +81,15 @@ class News extends CI_Controller
         $data['news_item'] = $news;
 
         $this->smarty->assign($data);
-        $this->smarty->display('news/news_form.tpl');
+        $this->display('news/news_form.tpl');
     }
 
     public function delete($id = NULL)
     {
         $news = $this->_get_news($id);
-        $this->news_model->delete($news);
+        if(isset($news['id'])) {
+            $this->news_model->delete($news);
+        }
         redirect('/news', 'refresh');
     }
 
@@ -104,7 +98,7 @@ class News extends CI_Controller
         if ($id === NULL) {
             $news = array();
         } else {
-            $news = $this->news_model->get_news($id);
+            $news = $this->news_model->find($id);
         }
         return $news;
     }

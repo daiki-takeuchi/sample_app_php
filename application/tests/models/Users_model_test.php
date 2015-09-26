@@ -66,7 +66,7 @@ class Users_model_test extends TestCase
     public function emaiilを指定してユーザーを取得()
     {
         $expected = 'email1@example.com';
-        $sut = $this->users_model->get_users_by_email($expected);
+        $sut = $this->users_model->find_by_email($expected);
         $this->assertEquals($expected, $sut['email']);
     }
 
@@ -106,13 +106,13 @@ class Users_model_test extends TestCase
         );
         $this->users_model->save($users);
 
-        $sut = $this->users_model->get_users($users['id']);
+        $sut = $this->users_model->find($users['id']);
         $sut['name'] = $expected;
 
         // test
         $this->users_model->save($sut);
 
-        $actual = $this->users_model->get_users($users['id'])['name'];
+        $actual = $this->users_model->find($users['id'])['name'];
 
         $this->assertEquals($expected, $actual);
 

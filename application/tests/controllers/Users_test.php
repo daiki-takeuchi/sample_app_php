@@ -24,7 +24,7 @@ class Users_test extends TestCase
      */
     public function 詳細ページに遷移できる()
     {
-        $user = $this->users_model->get_users()[0];
+        $user = $this->users_model->find()[0];
 
         // Verify
         $output = $this->request('GET', ['Users', 'view', $user['id']]);
@@ -58,7 +58,7 @@ class Users_test extends TestCase
      */
     public function ユーザー登録できること()
     {
-        $before = count($this->users_model->get_users());
+        $before = count($this->users_model->find());
 
         // Exercise
         $post = [
@@ -69,7 +69,7 @@ class Users_test extends TestCase
         ];
         $this->request('POST', ['Users', 'create'], $post);
 
-        $after = count($this->users_model->get_users());
+        $after = count($this->users_model->find());
 
         // 更新前の件数に1件追加されている
         $this->assertEquals($before + 1, $after);
@@ -84,7 +84,7 @@ class Users_test extends TestCase
     public function バリデーションチェックの確認()
     {
         // Setup
-        $before = count($this->users_model->get_users());
+        $before = count($this->users_model->find());
 
         // 必須チェック
         $post = [
@@ -119,7 +119,7 @@ class Users_test extends TestCase
         $output = $this->request('POST', ['Users', 'create'], $post);
         $this->assertContains('パスワード 欄が パスワードの確認 欄と一致しません。', $output);
 
-        $after = count($this->users_model->get_users());
+        $after = count($this->users_model->find());
 
         // 更新前後で件数が変わらない
         $this->assertEquals($before, $after);
@@ -168,7 +168,7 @@ class Users_test extends TestCase
         ];
         // Exercise
         $this->request('POST', ['Users', 'edit' ,$user['id']], $post);
-        $sut = $this->users_model->get_users($user['id']);
+        $sut = $this->users_model->find($user['id']);
 
         // Verify
         $this->assertEquals('email_user_edit_after@example.com', $sut['email']);

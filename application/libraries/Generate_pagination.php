@@ -5,7 +5,7 @@ class Generate_pagination
     private $CI;
 
     // ページネーションの生成
-    public function get_links($path, $total, $limit)
+    public function get_links($path, $total, $per_page)
     {
         $this->CI =& get_instance();
         $this->CI->load->library('pagination');
@@ -13,7 +13,7 @@ class Generate_pagination
         $config = [];
         $config['base_url']       = $path;
         $config['total_rows']     = $total;
-        $config['per_page']       = $limit;
+        $config['per_page']       = $per_page;
 //        $config['reuse_query_string'] = TRUE;
         $config['full_tag_open'] = '<ul class="pagination">';
         $config['full_tag_close'] = '</ul>';

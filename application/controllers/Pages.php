@@ -1,23 +1,14 @@
 <?php
 
-class Pages extends CI_Controller
+class Pages extends MY_Controller
 {
-
-    public function __construct()
-    {
-        parent::__construct();
-        $this->load->helper('url');
-        $this->smarty->template_dir = APPPATH . 'views';
-        $this->smarty->compile_dir = APPPATH . 'views/templates_c';
-    }
-
     public function index($page = 'home')
     {
         if (!file_exists(APPPATH . '/views/pages/' . $page . '.tpl')) {
             // Whoops, we don't have a page for that!
             show_404();
         }
-        $this->smarty->display('pages/' . $page . '.tpl');
+        $this->display('pages/' . $page . '.tpl');
     }
 
     public function login()
@@ -33,7 +24,7 @@ class Pages extends CI_Controller
         $data['post'] = $_POST;
 
         $this->smarty->assign($data);
-        $this->smarty->display('pages/login.tpl');
+        $this->display('pages/login.tpl');
     }
 
     private function _login_validation()
@@ -44,7 +35,7 @@ class Pages extends CI_Controller
         $this->form_validation->set_rules("password", "パスワード", "required|sha1|trim");
         if ($this->form_validation->run() !== FALSE) {
             $email = $this->input->post("email");
-            $user = $this->users_model->get_users_by_email($email);
+            $user = $this->users_model->find_by_email($email);
             $data = array(
                 "user" => $user,
                 "is_logged_in" => 1
@@ -76,16 +67,16 @@ class Pages extends CI_Controller
 
     public function about()
     {
-        $this->smarty->display('pages/about.tpl');
+        $this->display('pages/about.tpl');
     }
 
     public function contact()
     {
-        $this->smarty->display('pages/contact.tpl');
+        $this->display('pages/contact.tpl');
     }
 
     public function help()
     {
-        $this->smarty->display('pages/help.tpl');
+        $this->display('pages/help.tpl');
     }
 }
