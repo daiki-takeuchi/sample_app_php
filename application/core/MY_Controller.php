@@ -8,8 +8,6 @@
  */
 class MY_Controller extends CI_Controller
 {
-    protected $template;
-
     public function __construct()
     {
         parent::__construct();
@@ -19,18 +17,12 @@ class MY_Controller extends CI_Controller
         $this->load->helper('url');
     }
 
+    /**
+     * @param String $template
+     * @return void
+     */
     public function display($template)
     {
-//        $this->template = $template;
         $this->smarty->display($template);
     }
-
-//    public function _output($output)
-//    {
-//        if (strlen($output) > 0) {
-//            echo $output;
-//        } else {
-//            $this->smarty->display($this->template);
-//        }
-//    }
 }

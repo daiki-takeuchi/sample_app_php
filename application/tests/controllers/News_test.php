@@ -342,23 +342,61 @@ class News_test extends TestCase
     /**
      * @test
      */
-    public function test_method_404()
+    public function 存在しないニュースは削除できない()
     {
-        $this->request('GET', ['News', 'method_not_exist']);
-        $this->assertResponseCode(404);
+        // Setup ログイン
+        $data = [
+            'email' => 'email1@example.com',
+            'password' => 'password',
+        ];
+        $this->request('POST', ['Pages', 'login'], $data);
+
+        $news = $this->news_model->get_news()[0];
+
+        $before = count($this->news_model->find());
+
+        $this->request('GET', ['News', 'delete', $news['id'] + 1]);
+
+        $after = count($this->news_model->find());
+
+        // 更新前後の件数が変わらない
+        $this->assertEquals($before, $after);
+
+        // TearDown ログアウト
+        $this->request('GET', ['Pages', 'logout']);
     }
 
     /**
      * @test
      */
-    public function test_APPPATH()
+    public function 引数Nullの場合は削除できない()
     {
-        $actual = realpath(APPPATH);
-        $expected = realpath(__DIR__ . '/../..');
-        $this->assertEquals(
-            $expected,
-            $actual,
-            'Your APPPATH seems to be wrong. Check your $application_folder in tests/Bootstrap.php'
-        );
+        // Setup ログイン
+        $data = [
+            'email' => 'email1@example.com',
+            'password' => 'password',
+        ];
+        $this->request('POST', ['Pages', 'login'], $data);
+
+        $before = count($this->news_model->find());
+
+        $this->request('GET', ['News', 'delete']);
+
+        $after = count($this->news_model->find());
+
+        // 更新前後の件数が変わらない
+        $this->assertEquals($before, $after);
+
+        // TearDown ログアウト
+        $this->request('GET', ['Pages', 'logout']);
+    }
+
+    /**
+     * @test
+     */
+    public function test_method_404()
+    {
+        $this->request('GET', ['News', 'method_not_exist']);
+        $this->assertResponseCode(404);
     }
 }

@@ -67,16 +67,12 @@ class Users extends MY_Controller
 
     private function _save_user(&$user)
     {
-        $this->form_validation->set_rules("email", "メールアドレス", "required|trim|valid_email");
-        $this->form_validation->set_rules('name', '名前', 'required');
-        $this->form_validation->set_rules("password", "パスワード", "required|trim|matches[password_confirmation]");
-        $this->form_validation->set_rules("password_confirmation", "パスワードの確認", "required|trim");
 
         $user['email'] = $this->input->post('email');
         $user['name'] = $this->input->post('name');
         $user['password'] = sha1($this->input->post('email').$this->input->post('password'));
 
-        if ($this->form_validation->run() !== FALSE) {
+        if ($this->form_validation->run('user') !== FALSE) {
 
             $this->users_model->save($user);
             $data = array(

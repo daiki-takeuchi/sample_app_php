@@ -74,7 +74,6 @@ class News extends MY_Controller
             $data['title'] = 'ニュース編集';
         }
 
-//      echo var_dump($id);
         if ($_POST) {
             $this->_save_news($news);
         }
@@ -105,9 +104,7 @@ class News extends MY_Controller
 
     private function _save_news(&$news)
     {
-        $this->form_validation->set_rules('title', 'タイトル', 'required');
-        $this->form_validation->set_rules('text', '内容', 'required');
-        if ($this->form_validation->run() !== FALSE) {
+        if ($this->form_validation->run('news') !== FALSE) {
 
             $news['title'] = $this->input->post('title');
             $news['text'] = $this->input->post('text');
