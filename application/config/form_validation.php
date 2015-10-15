@@ -33,5 +33,17 @@ $config = array(
             'label' => '内容',
             'rules' => 'required'
         )
+    ),
+    'login' => array(
+        array(
+            'field' => 'email',
+            'label' => 'メールアドレス',
+            'rules' => 'required|trim|valid_email|validate_credentials'
+        ),
+        array(
+            'field' => 'password',
+            'label' => 'パスワード',
+            'rules' => 'required|sha1|trim'
+        )
     )
 );

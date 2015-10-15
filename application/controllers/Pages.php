@@ -31,9 +31,7 @@ class Pages extends MY_Controller
     {
         $this->load->library("form_validation");
 
-        $this->form_validation->set_rules("email", "メールアドレス", "required|trim|valid_email|callback__validate_credentials");
-        $this->form_validation->set_rules("password", "パスワード", "required|sha1|trim");
-        if ($this->form_validation->run() !== FALSE) {
+        if ($this->form_validation->run('login') !== FALSE) {
             $email = $this->input->post("email");
             $user = $this->users_model->find_by_email($email);
             $data = array(
@@ -43,20 +41,6 @@ class Pages extends MY_Controller
 //            var_dump($data);
             $this->session->set_userdata($data);
             redirect(site_url());
-        }
-    }
-
-    public function _validate_credentials()
-    {
-        $email = $this->input->post("email");
-        $password = $this->input->post("password");
-        $this->load->model("users_model");
-
-        if($this->users_model->can_log_in($email, $password)) {
-            return true;
-        } else {
-            $this->form_validation->set_message("_validate_credentials", "ユーザー名かパスワードが異なります。");
-            return false;
         }
     }
 
