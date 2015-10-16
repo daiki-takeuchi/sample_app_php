@@ -104,12 +104,11 @@ class News extends MY_Controller
 
     private function _save_news(&$news)
     {
+        $news['title'] = $this->input->post('title');
+        $news['text'] = $this->input->post('text');
+        $news['author_id'] = $this->session->userdata('user')['id'];
+
         if ($this->form_validation->run('news') !== FALSE) {
-
-            $news['title'] = $this->input->post('title');
-            $news['text'] = $this->input->post('text');
-            $news['author_id'] = $this->session->userdata('user')['id'];
-
             $this->news_model->save($news);
             redirect('/news/' . $news['id'], 'refresh');
         }
