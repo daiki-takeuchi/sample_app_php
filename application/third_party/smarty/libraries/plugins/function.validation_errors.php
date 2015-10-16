@@ -26,5 +26,12 @@ function smarty_function_validation_errors_javascript($params,&$smarty)
 	}
 	$CI= &get_instance();
 	$CI->form_validation->set_error_delimiters('','');
-	return '<script type="application/javascript">window.onload=function(){alert(\''.str_replace("\n","\\n",validation_errors()).'\')};</script>';
+
+	$script = '<script type="application/javascript">';
+	$script .= '    window.onload=function(){';
+	$script .= '        alert(\''.str_replace("\n","\\n",validation_errors()).'\')';
+	$script .= '    };';
+	$script .= '</script>';
+
+	return $script;
 }
