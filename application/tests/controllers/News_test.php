@@ -257,6 +257,7 @@ class News_test extends TestCase
             'title' => '単体テスト_title_ニュース編集遷移',
             'text' => '単体テスト_text_ニュース編集遷移',
         );
+        $this->request('POST', ['News', 'create'], $news);
         $this->news_model->save($news);
 
         // Exercise

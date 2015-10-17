@@ -50,6 +50,9 @@ class MY_Model extends CI_Model
     {
         $this->db->where('id', $data['id']);
         $this->db->delete($this->table);
+
+        // 空にする
+        $data = array();
         log_message('info', $this->db->last_query());
     }
 
