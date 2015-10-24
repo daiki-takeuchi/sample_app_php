@@ -30,6 +30,7 @@
     <div class="row">
         <div class="col-md-12">
             <a class="btn btn-primary" href="{site_url}news/create">ニュース登録</a>
+            <a class="btn btn-primary" href="{site_url}news/download">ダウンロード</a>
         </div>
     </div>
 {/block}
