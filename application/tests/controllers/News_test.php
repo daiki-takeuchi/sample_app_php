@@ -395,6 +395,14 @@ class News_test extends TestCase
     /**
      * @test
      */
+    public function エクセルをダウンロードする()
+    {
+        $this->request('GET', ['News', 'download']);
+    }
+
+    /**
+     * @test
+     */
     public function test_method_404()
     {
         $this->request('GET', ['News', 'method_not_exist']);
