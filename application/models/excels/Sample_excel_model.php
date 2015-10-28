@@ -23,9 +23,9 @@ class Sample_excel_model extends CI_Model
 
     private function _setData($data)
     {
-        $this->excel->setCellValue('A1', $data['col1']);
-        $this->excel->setCellValue('B2', $data['col2']);
-        $this->excel->setCellValue('C1', $data['col3']);
-        $this->excel->setCellValue('D2', $data['col4']);
+        $this->excel->setCellValue('A1', $data['col1'])
+                    ->setCellValue('B2', $data['col2'])
+                    ->setCellValue('C1', $data['col3'])
+                    ->setCellValue('D2', $data['col4']);
     }
 }

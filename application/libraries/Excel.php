@@ -17,6 +17,7 @@ class Excel
     {
         $this->excel->setActiveSheetIndex($this->activeSheetIndex)
             ->setCellValue($cell, $value);
+        return $this;
     }
 
     public function setActiveSheetIndex($activeSheetIndex)
