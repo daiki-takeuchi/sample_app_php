@@ -19,14 +19,14 @@ class Users_model extends MY_Model
 
     public function find_by_email($email = FALSE)
     {
-        $query = $this->db->get_where('users', array('email' => $email));
+        $query = $this->db->get_where($this->table, array('email' => $email));
         return $query->row_array();
     }
 
     public function get_users($offset = FALSE)
     {
         $this->db->order_by('id', 'desc');
-        if($offset === FALSE){
+        if($offset !== FALSE){
             $this->db->limit($this->per_page, $offset);
         }
         return $this->find();
