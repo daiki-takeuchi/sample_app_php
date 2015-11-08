@@ -1,4 +1,13 @@
 <?php
+/**
+ * System messages translation for CodeIgniter(tm)
+ *
+ * @author	CodeIgniter community
+ * @copyright	Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
+ * @license	http://opensource.org/licenses/MIT	MIT License
+ * @link	http://codeigniter.com
+ */
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 $lang['date_year'] = "年";
 $lang['date_years'] = "年";
@@ -55,6 +64,3 @@ $lang['UP12']	= '(UTC +12:00) フィジー、ギルバート諸島、カムチ�
 $lang['UP1275']	= '(UTC +12:45) チャタム諸島標準時';
 $lang['UP13']	= '(UTC +13:00) フェニックス諸島時間、トンガ';
 $lang['UP14']	= '(UTC +14:00) ライン諸島';
-
-/* End of file date_lang.php */
-/* Location: ./system/language/japanese/date_lang.php */

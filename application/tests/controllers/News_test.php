@@ -141,7 +141,7 @@ class News_test extends TestCase
             'text' => '内容_テスト',
         ];
         $output = $this->request('POST', ['News', 'create'], $news);
-        $this->assertContains('タイトル 欄は必須です。', $output);
+        $this->assertContains('タイトル欄は必須フィールドです', $output);
 
         $after = count($this->news_model->get_news());
 
@@ -161,7 +161,7 @@ class News_test extends TestCase
             'text' => '',
         ];
         $output = $this->request('POST', ['News', 'create'], $news);
-        $this->assertContains('内容 欄は必須です。', $output);
+        $this->assertContains('内容欄は必須フィールドです', $output);
 
         $after = count($this->news_model->get_news());
 

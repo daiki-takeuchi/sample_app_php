@@ -1,10 +1,19 @@
 <?php
+/**
+ * System messages translation for CodeIgniter(tm)
+ *
+ * @author	CodeIgniter community
+ * @copyright	Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
+ * @license	http://opensource.org/licenses/MIT	MIT License
+ * @link	http://codeigniter.com
+ */
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 $lang['upload_userfile_not_set'] = "ユーザファイルがセットされていません。";
 $lang['upload_file_exceeds_limit'] = "アップロードされたファイルはPHP設定ファイルで許可されている最大サイズを超過しています。";
 $lang['upload_file_exceeds_form_limit'] = "アップロードされたファイルはフォームで許可されている最大サイズを超過しています。";
 $lang['upload_file_partial'] = "ファイルの一部しかアップロードされていません。";
-$lang['upload_no_temp_directory'] = "一時ディレクトリがありません。";
+$lang['upload_no_temp_directory'] = "一時用フォルダーがありません。";
 $lang['upload_unable_to_write_file'] = "ファイルをディスクに書き込めませんでした。";
 $lang['upload_stopped_by_extension'] = "アップロードは、拡張子により中止されました。";
 $lang['upload_no_file_selected'] = "アップロードするファイルが選択されていません。";
@@ -16,7 +25,3 @@ $lang['upload_no_filepath'] = "アップロードパスが間違っています�
 $lang['upload_no_file_types'] = "許可されているファイルタイプが指定されていません。";
 $lang['upload_bad_filename'] = "送信されたファイル名と同名のファイルがすでにサーバ上に存在します。";
 $lang['upload_not_writable'] = "アップロード先のフォルダに書き込みできません。";
-
-
-/* End of file upload_lang.php */
-/* Location: ./system/language/japanese/upload_lang.php */

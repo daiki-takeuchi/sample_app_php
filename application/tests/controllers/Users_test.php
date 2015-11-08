@@ -94,10 +94,10 @@ class Users_test extends TestCase
             'password_confirmation' => '',
         ];
         $output = $this->request('POST', ['Users', 'create'], $post);
-        $this->assertContains('メールアドレス 欄は必須です。', $output);
-        $this->assertContains('名前 欄は必須です。', $output);
-        $this->assertContains('パスワード 欄は必須です。', $output);
-        $this->assertContains('パスワードの確認 欄は必須です。', $output);
+        $this->assertContains('メールアドレス欄は必須フィールドです', $output);
+        $this->assertContains('名前欄は必須フィールドです', $output);
+        $this->assertContains('パスワード欄は必須フィールドです', $output);
+        $this->assertContains('パスワードの確認欄は必須フィールドです', $output);
 
         // メールアドレス妥当性チェック
         $post = [
@@ -107,7 +107,7 @@ class Users_test extends TestCase
             'password_confirmation' => 'password',
         ];
         $output = $this->request('POST', ['Users', 'create'], $post);
-        $this->assertContains('メールアドレス 欄には正しいEmailアドレスを入力する必要があります。', $output);
+        $this->assertContains('メールアドレス欄はメールアドレスとして正しい形式でなければいけません', $output);
 
         // パスワード確認チェック
         $post = [
@@ -117,7 +117,7 @@ class Users_test extends TestCase
             'password_confirmation' => 'bad_password_conf',
         ];
         $output = $this->request('POST', ['Users', 'create'], $post);
-        $this->assertContains('パスワード 欄が パスワードの確認 欄と一致しません。', $output);
+        $this->assertContains('パスワード欄が パスワードの確認欄と同じではありません', $output);
 
         $after = count($this->users_model->find());
 
