@@ -15,25 +15,6 @@ class News_test extends TestCase
 
     public function setUp()
     {
-        $this->resetInstance();
-        $this->CI->load->model('News_model');
-        $this->news_model = $this->CI->News_model;
-    }
-
-    /**
-     * @test
-     */
-    public function ログインせずnewsページへ移動した場合はホームに移動する()
-    {
-        $this->request('GET', ['News', 'index']);
-        $this->assertRedirect('/');
-    }
-
-    /**
-     * @test
-     */
-    public function newsページへ移動した場合は一覧ページを表示()
-    {
         $data = [
             'email' => 'email1@example.com',
             'password' => 'password',
@@ -41,13 +22,25 @@ class News_test extends TestCase
         // ログインする
         $this->request('POST', ['Pages', 'login'], $data);
 
+        $this->resetInstance();
+        $this->CI->load->model('News_model');
+        $this->news_model = $this->CI->News_model;
+    }
+
+    public function tearDown()
+    {
+        // Teardown ログアウト
+        $this->request('GET', ['Pages', 'logout']);
+    }
+
+    /**
+     * @test
+     */
+    public function newsページへ移動した場合は一覧ページを表示()
+    {
         // Verify
         $output = $this->request('GET', ['News', 'index']);
         $this->assertContains('ニュース一覧', $output);
-
-        // Teardown ログアウト
-        $this->request('GET', ['Pages', 'logout']);
-
     }
 
 
@@ -56,21 +49,11 @@ class News_test extends TestCase
      */
     public function paginationで次のページへ移動する()
     {
-        // Setup ログイン
-        $data = [
-            'email' => 'email1@example.com',
-            'password' => 'password',
-        ];
-        $this->request('POST', ['Pages', 'login'], $data);
-
         // Exercise
         $output = $this->request('GET', ['News', 'pages', '10']);
 
         // Verify
         $this->assertContains('タイトル30', $output);
-
-        // Teardown ログアウト
-        $this->request('GET', ['Pages', 'logout']);
     }
 
     /**
@@ -78,13 +61,6 @@ class News_test extends TestCase
      */
     public function ニュース詳細に遷移する()
     {
-        // Setup ログイン
-        $data = [
-            'email' => 'email1@example.com',
-            'password' => 'password',
-        ];
-        $this->request('POST', ['Pages', 'login'], $data);
-
         // SetUp データ
         $news = array(
             'title' => '単体テスト_title_ニュース詳細遷移',
@@ -98,9 +74,8 @@ class News_test extends TestCase
         // Verify
         $this->assertContains('単体テスト_title_ニュース詳細遷移', $output);
 
-        // Teardown ログアウト
+        // Teardown データ
         $this->news_model->delete($news);
-        $this->request('GET', ['Pages', 'logout']);
     }
 
     /**
@@ -108,13 +83,6 @@ class News_test extends TestCase
      */
     public function 存在しないニュース詳細に遷移すると記事が存在しないページへ遷移()
     {
-        // Setup ログイン
-        $data = [
-            'email' => 'email1@example.com',
-            'password' => 'password',
-        ];
-        $this->request('POST', ['Pages', 'login'], $data);
-
         // SetUp データ
         $news = array(
             'title' => '単体テスト_title_ニュース詳細遷移',
@@ -128,9 +96,8 @@ class News_test extends TestCase
         // Verify
         $this->assertContains('News Not Found', $output);
 
-        // TearDown ログアウト
+        // TearDown データ
         $this->news_model->delete($news);
-        $this->request('GET', ['Pages', 'logout']);
     }
 
     /**
@@ -138,18 +105,8 @@ class News_test extends TestCase
      */
     public function 新規登録画面に遷移する()
     {
-        // Setup ログイン
-        $data = [
-            'email' => 'email1@example.com',
-            'password' => 'password',
-        ];
-        $this->request('POST', ['Pages', 'login'], $data);
-
         $output = $this->request('GET', ['News', 'create']);
         $this->assertContains('ニュース登録', $output);
-
-        // TearDown ログアウト
-        $this->request('GET', ['Pages', 'logout']);
     }
 
     /**
@@ -157,13 +114,6 @@ class News_test extends TestCase
      */
     public function ニュース登録できること()
     {
-        // Setup ログイン
-        $data = [
-            'email' => 'email1@example.com',
-            'password' => 'password',
-        ];
-        $this->request('POST', ['Pages', 'login'], $data);
-
         $before = count($this->news_model->find());
 
         // Exercise
@@ -177,9 +127,6 @@ class News_test extends TestCase
 
         // 更新前の件数に1件追加されている
         $this->assertEquals($before + 1, $after);
-
-        // TearDown ログアウト
-        $this->request('GET', ['Pages', 'logout']);
     }
 
     /**
@@ -187,12 +134,6 @@ class News_test extends TestCase
      */
     public function タイトルを入力してない場合は登録できない()
     {
-        // Setup ログイン
-        $data = [
-            'email' => 'email1@example.com',
-            'password' => 'password',
-        ];
-        $this->request('POST', ['Pages', 'login'], $data);
         $before = count($this->news_model->get_news());
 
         $news = [
@@ -206,9 +147,6 @@ class News_test extends TestCase
 
         // 更新前後で件数が変わらない
         $this->assertEquals($before, $after);
-
-        // TearDown ログアウト
-        $this->request('GET', ['Pages', 'logout']);
     }
 
     /**
@@ -216,12 +154,6 @@ class News_test extends TestCase
      */
     public function 内容を入力してない場合は登録できない()
     {
-        // Setup ログイン
-        $data = [
-            'email' => 'email1@example.com',
-            'password' => 'password',
-        ];
-        $this->request('POST', ['Pages', 'login'], $data);
         $before = count($this->news_model->get_news());
 
         $news = [
@@ -235,9 +167,6 @@ class News_test extends TestCase
 
         // 更新前後で件数が変わらない
         $this->assertEquals($before, $after);
-
-        // TearDown ログアウト
-        $this->request('GET', ['Pages', 'logout']);
     }
 
     /**
@@ -245,13 +174,6 @@ class News_test extends TestCase
      */
     public function ニュース編集に遷移する()
     {
-        // Setup ログイン
-        $data = [
-            'email' => 'email1@example.com',
-            'password' => 'password',
-        ];
-        $this->request('POST', ['Pages', 'login'], $data);
-
         // SetUp データ
         $news = array(
             'title' => '単体テスト_title_ニュース編集遷移',
@@ -266,9 +188,8 @@ class News_test extends TestCase
         // Verify
         $this->assertContains('単体テスト_title_ニュース編集遷移', $output);
 
-        // Teardown ログアウト
+        // Teardown データ
         $this->news_model->delete($news);
-        $this->request('GET', ['Pages', 'logout']);
     }
 
     /**
@@ -276,13 +197,6 @@ class News_test extends TestCase
      */
     public function ニュースが編集できる()
     {
-        // Setup ログイン
-        $data = [
-            'email' => 'email1@example.com',
-            'password' => 'password',
-        ];
-        $this->request('POST', ['Pages', 'login'], $data);
-
         // SetUp データ
         $news = array(
             'title' => 'タイトル変更前',
@@ -304,9 +218,8 @@ class News_test extends TestCase
         // 詳細ページにリダイレクトする
         $this->assertRedirect('/news/'.$news['id']);
 
-        // Teardown ログアウト
+        // Teardown データ
         $this->news_model->delete($news);
-        $this->request('GET', ['Pages', 'logout']);
     }
 
     /**
@@ -314,13 +227,6 @@ class News_test extends TestCase
      */
     public function ニュースが削除できる()
     {
-        // Setup ログイン
-        $data = [
-            'email' => 'email1@example.com',
-            'password' => 'password',
-        ];
-        $this->request('POST', ['Pages', 'login'], $data);
-
         $news = array(
             'title' => '単体テスト_title_削除用',
             'text' => '単体テスト_text_削除用',
@@ -335,9 +241,6 @@ class News_test extends TestCase
 
         // 更新前の件数に1件削除されている
         $this->assertEquals($before - 1, $after);
-
-        // TearDown ログアウト
-        $this->request('GET', ['Pages', 'logout']);
     }
 
     /**
@@ -345,13 +248,6 @@ class News_test extends TestCase
      */
     public function 存在しないニュースは削除できない()
     {
-        // Setup ログイン
-        $data = [
-            'email' => 'email1@example.com',
-            'password' => 'password',
-        ];
-        $this->request('POST', ['Pages', 'login'], $data);
-
         $news = $this->news_model->get_news()[0];
 
         $before = count($this->news_model->find());
@@ -362,9 +258,6 @@ class News_test extends TestCase
 
         // 更新前後の件数が変わらない
         $this->assertEquals($before, $after);
-
-        // TearDown ログアウト
-        $this->request('GET', ['Pages', 'logout']);
     }
 
     /**
@@ -372,13 +265,6 @@ class News_test extends TestCase
      */
     public function 引数Nullの場合は削除できない()
     {
-        // Setup ログイン
-        $data = [
-            'email' => 'email1@example.com',
-            'password' => 'password',
-        ];
-        $this->request('POST', ['Pages', 'login'], $data);
-
         $before = count($this->news_model->find());
 
         $this->request('GET', ['News', 'delete']);
@@ -387,9 +273,6 @@ class News_test extends TestCase
 
         // 更新前後の件数が変わらない
         $this->assertEquals($before, $after);
-
-        // TearDown ログアウト
-        $this->request('GET', ['Pages', 'logout']);
     }
 
     /**

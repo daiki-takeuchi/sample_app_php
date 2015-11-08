@@ -63,9 +63,6 @@ class News extends MY_Controller
 
     public function edit($id = NULL)
     {
-        $this->load->helper('form');
-        $this->load->library('form_validation');
-
         $news = NULL;
         if ($id === NULL) {
             $data['title'] = 'ニュース登録';
@@ -118,6 +115,9 @@ class News extends MY_Controller
 
     private function _save_news(&$news)
     {
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+
         $news['title'] = $this->input->post('title');
         $news['text'] = $this->input->post('text');
         $news['author_id'] = $this->session->userdata('user')['id'];
