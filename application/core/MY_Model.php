@@ -10,7 +10,6 @@ class MY_Model extends CI_Model
 {
     protected $table;
     protected $per_page;
-    private $offset;
 
     public function __construct()
     {
@@ -34,8 +33,7 @@ class MY_Model extends CI_Model
     public function save(&$data)
     {
         if (!isset($data['id'])) {
-            $data['created_at'] = date('Y/m/d H:i:s');
-            $data['updated_at'] = date('Y/m/d H:i:s');
+            $data['created_at'] = $data['updated_at'] = date('Y/m/d H:i:s');
             $this->db->insert($this->table, $data);
             $data['id'] = $this->db->insert_id();
         } else {
