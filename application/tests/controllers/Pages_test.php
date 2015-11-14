@@ -50,7 +50,7 @@ class Pages_test extends TestCase
      */
     public function aboutページ遷移する()
     {
-        $output = $this->request('GET', ['Pages', 'about']);
+        $output = $this->request('GET', ['Pages', 'index', 'about']);
         $this->assertContains('about', $output);
     }
 
@@ -59,8 +59,8 @@ class Pages_test extends TestCase
      */
     public function contactページ遷移する()
     {
-        $output = $this->request('GET', ['Pages', 'contact']);
-        $this->assertContains('Contact', $output);
+        $output = $this->request('GET', ['Pages', 'index', 'contact']);
+        $this->assertContains('<title>Contact</title>', $output);
     }
 
     /**
@@ -68,8 +68,8 @@ class Pages_test extends TestCase
      */
     public function helpページ遷移する()
     {
-        $output = $this->request('GET', ['Pages', 'help']);
-        $this->assertContains('ヘルプ | サンプルアプリケーション', $output);
+        $output = $this->request('GET', ['Pages', 'index', 'help']);
+        $this->assertContains('<title>Help</title>', $output);
     }
 
     /**

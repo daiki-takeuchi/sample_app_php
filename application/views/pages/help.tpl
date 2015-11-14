@@ -1,8 +1,6 @@
 {extends file='templates/application.tpl'}
 
-{block name=title}
-    {'ヘルプ | サンプルアプリケーション'}
-{/block}
+{block name=title}{$title}{/block}
 
 {block name=main_contents}
     <div>

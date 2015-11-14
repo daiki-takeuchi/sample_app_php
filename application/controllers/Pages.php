@@ -8,6 +8,9 @@ class Pages extends MY_Controller
             // Whoops, we don't have a page for that!
             show_404();
         }
+        $data['title'] = ucfirst($page);
+
+        $this->smarty->assign($data);
         $this->display('pages/' . $page . '.tpl');
     }
 
@@ -38,7 +41,6 @@ class Pages extends MY_Controller
                 "user" => $user,
                 "is_logged_in" => 1
             );
-//            var_dump($data);
             $this->session->set_userdata($data);
             redirect(site_url());
         }
@@ -47,20 +49,5 @@ class Pages extends MY_Controller
     public function logout() {
         $this->session->sess_destroy();
         redirect(site_url());
-    }
-
-    public function about()
-    {
-        $this->display('pages/about.tpl');
-    }
-
-    public function contact()
-    {
-        $this->display('pages/contact.tpl');
-    }
-
-    public function help()
-    {
-        $this->display('pages/help.tpl');
     }
 }
