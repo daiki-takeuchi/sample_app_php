@@ -50,7 +50,7 @@ class Pages_test extends TestCase
      */
     public function aboutページ遷移する()
     {
-        $output = $this->request('GET', ['Pages', 'index', 'about']);
+        $output = $this->request('GET', 'about');
         $this->assertContains('about', $output);
     }
 
@@ -59,7 +59,7 @@ class Pages_test extends TestCase
      */
     public function contactページ遷移する()
     {
-        $output = $this->request('GET', ['Pages', 'index', 'contact']);
+        $output = $this->request('GET', 'contact');
         $this->assertContains('<title>Contact</title>', $output);
     }
 
@@ -68,7 +68,7 @@ class Pages_test extends TestCase
      */
     public function helpページ遷移する()
     {
-        $output = $this->request('GET', ['Pages', 'index', 'help']);
+        $output = $this->request('GET', 'help');
         $this->assertContains('<title>Help</title>', $output);
     }
 
@@ -77,7 +77,7 @@ class Pages_test extends TestCase
      */
     public function ログインページに遷移する()
     {
-        $output = $this->request('GET', ['Pages', 'login']);
+        $output = $this->request('GET', 'login');
         $this->assertContains('ログインページ', $output);
     }
 
@@ -91,11 +91,11 @@ class Pages_test extends TestCase
             'password' => 'password',
         ];
         // ログインするとホームに遷移する
-        $this->request('POST', ['Pages', 'login'], $data);
+        $this->request('POST', 'login', $data);
         $this->assertRedirect('/', 302);
 
         // ログイン状態でログイン画面に遷移するとホームに遷移する
-        $this->request('GET', ['Pages', 'login']);
+        $this->request('GET', 'login');
         $this->assertRedirect('/', 302);
     }
 
@@ -109,10 +109,10 @@ class Pages_test extends TestCase
             'password' => 'password',
         ];
         // ログインする
-        $this->request('POST', ['Pages', 'login'], $data);
+        $this->request('POST', 'login', $data);
 
         // ログアウトするとホームに遷移する
-        $this->request('GET', ['Pages', 'logout']);
+        $this->request('GET', 'logout');
         $this->assertRedirect('/', 302);
     }
 
@@ -126,7 +126,7 @@ class Pages_test extends TestCase
             'password' => 'bad password',
         ];
         // ログインする
-        $output = $this->request('POST', ['Pages', 'login'], $data);
+        $output = $this->request('POST', 'login', $data);
         $this->assertContains('ユーザー名かパスワードが異なります。', $output);
     }
 
@@ -140,7 +140,7 @@ class Pages_test extends TestCase
             'password' => 'password',
         ];
         // ログインする
-        $output = $this->request('POST', ['Pages', 'login'], $data);
+        $output = $this->request('POST', 'login', $data);
         $this->assertContains('ユーザー名かパスワードが異なります。', $output);
     }
 

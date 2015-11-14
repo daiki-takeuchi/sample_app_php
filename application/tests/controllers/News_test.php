@@ -20,7 +20,7 @@ class News_test extends TestCase
             'password' => 'password',
         ];
         // ログインする
-        $this->request('POST', ['Pages', 'login'], $data);
+        $this->request('POST', 'login', $data);
 
         $this->resetInstance();
         $this->CI->load->model('News_model');
@@ -30,7 +30,7 @@ class News_test extends TestCase
     public function tearDown()
     {
         // Teardown ログアウト
-        $this->request('GET', ['Pages', 'logout']);
+        $this->request('GET', 'logout');
     }
 
     /**
