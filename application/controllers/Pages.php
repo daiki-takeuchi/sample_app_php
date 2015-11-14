@@ -50,4 +50,19 @@ class Pages extends MY_Controller
         $this->session->sess_destroy();
         redirect(site_url());
     }
+
+    public function about()
+    {
+        $this->index('about');
+    }
+
+    public function contact()
+    {
+        $this->index('contact');
+    }
+
+    public function help()
+    {
+        $this->index('help');
+    }
 }
