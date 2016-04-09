@@ -50,11 +50,10 @@
                 </div>
                 <div class="modal-footer">
                     <div class="row">
-                        <div class="col-md-6 col-md-offset-3">
+                        <div class="col-md-6 col-md-offset-1">
                             <button type="submit" name="submit" class="btn btn-primary">ログイン</button>
                         </div>
                     </div>
-                    {validation_errors}
                 </div>
             </div>
         </form>
