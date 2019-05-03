@@ -10,6 +10,6 @@
 		"phpoffice/phpexcel": "1.8.1"
 	},
 	"require-dev": {
-		"mikey179/vfsStream": "1.1.*"
+		"mikey179/vfsstream": "1.1.*"
 	}
 }
